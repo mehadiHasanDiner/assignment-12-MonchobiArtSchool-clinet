@@ -1,7 +1,15 @@
 import { Link, NavLink } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { MdLogout } from "react-icons/md";
+
+import useAuth from "../hooks/useAuth";
 
 const Navbar = () => {
+  const { user } = useAuth();
+  console.log(user);
+
+  const handleSignOut = () => {};
+
   const active = {
     color: "crimson",
     fontWeight: "bold",
@@ -60,10 +68,10 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{navItems}</ul>
       </div>
       <div className="navbar-end">
-        {/* {user ? (
+        {user ? (
           <div className=" dropdown dropdown-bottom dropdown-end">
             <div tabIndex={0} role="button" className="avatar m-1">
-              <div className="w-11 rounded-full  ring-2 ring-warning ring-offset-base-100 ring-offset-2">
+              <div className="w-11 rounded-full  ring-2 ring-success ring-offset-base-100 ring-offset-2">
                 <img src={user.photoURL} />
               </div>
             </div>
@@ -92,7 +100,7 @@ const Navbar = () => {
           >
             <button className="btn btn-sm">Sign In</button>
           </NavLink>
-        )} */}
+        )}
       </div>
     </div>
   );
