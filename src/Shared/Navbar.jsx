@@ -1,6 +1,8 @@
 import { Link, NavLink } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdLogout } from "react-icons/md";
+import { FaTimes } from "react-icons/fa";
+
 import logo from "../assets/monchobi.png";
 
 import useAuth from "../hooks/useAuth";
@@ -17,12 +19,12 @@ const Navbar = () => {
   const handleSignOut = () => {};
 
   const active = {
-    color: "white",
+    color: "yellow",
     fontWeight: "bold",
   };
 
   const inactive = {
-    color: "black",
+    color: "white",
   };
 
   const navItems = (
@@ -37,9 +39,9 @@ const Navbar = () => {
       <NavLink
         className="mr-6 "
         style={({ isActive }) => (isActive ? active : inactive)}
-        to="/allToys"
+        to="/login"
       >
-        All Toys
+        Login
       </NavLink>
 
       <NavLink
@@ -53,16 +55,20 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar bg-neutral-200 shadow-xl sticky top-0 right-0 z-40 ">
+    <div className="navbar bg-pink-800 shadow-xl sticky top-0 right-0 z-40 ">
       <div className="navbar-start">
         <div onClick={() => handleMenuOpen()} className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden ">
-            <GiHamburgerMenu size={26} />
+            {isOpen ? (
+              <FaTimes color="white" size={26} />
+            ) : (
+              <GiHamburgerMenu color="white" size={26} />
+            )}
           </div>
           {isOpen && (
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-2 -ml-2 z-[30] p-8 shadow bg-neutral-600 w-56 my-3 h-screen space-y-2"
+              className="menu menu-sm dropdown-content mt-3 -ml-2 z-[30] p-8 shadow bg-pink-800 w-56 my-3 rounded-md h-96 space-y-2"
             >
               {navItems}
             </ul>
@@ -79,7 +85,7 @@ const Navbar = () => {
         {user ? (
           <div className=" dropdown dropdown-bottom dropdown-end">
             <div tabIndex={0} role="button" className="avatar m-1">
-              <div className="w-11 rounded-full  ring-2 ring-black ring-offset-base-100 ring-offset-2">
+              <div className="w-11 rounded-full  ring-2 ring-neutral-800 ring-offset-base-100 ring-offset-2">
                 <img src={user.photoURL} />
               </div>
             </div>
