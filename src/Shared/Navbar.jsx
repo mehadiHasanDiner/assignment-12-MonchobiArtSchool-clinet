@@ -1,17 +1,23 @@
 import { Link, NavLink } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdLogout } from "react-icons/md";
+import logo from "../assets/monchobi.png";
 
 import useAuth from "../hooks/useAuth";
+import { useState } from "react";
 
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const { user } = useAuth();
-  console.log(user);
+
+  const handleMenuOpen = () => {
+    setIsOpen(!isOpen);
+  };
 
   const handleSignOut = () => {};
 
   const active = {
-    color: "crimson",
+    color: "white",
     fontWeight: "bold",
   };
 
@@ -47,21 +53,23 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar bg-green-200 shadow-xl sticky top-0 z-40 ">
+    <div className="navbar bg-neutral-200 shadow-xl sticky top-0 right-0 z-40 ">
       <div className="navbar-start">
-        <div className="dropdown">
+        <div onClick={() => handleMenuOpen()} className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden ">
             <GiHamburgerMenu size={26} />
           </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[30] p-6 shadow bg-green-100 rounded-box w-52 space-y-2"
-          >
-            {navItems}
-          </ul>
+          {isOpen && (
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content mt-2 -ml-2 z-[30] p-8 shadow bg-neutral-600 w-56 my-3 h-screen space-y-2"
+            >
+              {navItems}
+            </ul>
+          )}
         </div>
         <Link to="/" className=" w-24 text-xl">
-          {/* <img src={logo} alt="" /> */}
+          <img className="h-12" src={logo} alt="" />
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
@@ -71,7 +79,7 @@ const Navbar = () => {
         {user ? (
           <div className=" dropdown dropdown-bottom dropdown-end">
             <div tabIndex={0} role="button" className="avatar m-1">
-              <div className="w-11 rounded-full  ring-2 ring-success ring-offset-base-100 ring-offset-2">
+              <div className="w-11 rounded-full  ring-2 ring-black ring-offset-base-100 ring-offset-2">
                 <img src={user.photoURL} />
               </div>
             </div>
