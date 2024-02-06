@@ -3,9 +3,11 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { FaRegEyeSlash } from "react-icons/fa6";
 import { FaRegEye } from "react-icons/fa";
+import useAuth from "../../hooks/useAuth";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const { createUser, updateLoggedInUser } = useAuth();
 
   const {
     register,
@@ -19,7 +21,26 @@ const SignUp = () => {
   };
 
   const onSubmit = (formData) => {
-    console.log(formData);
+    const email = formData.email;
+    const password = formData.password;
+    createUser(email, password)
+      .then((result) => {
+        const loggedUser = result.user;
+        updateLoggedInUser(loggedUser, {
+          displayName: formData.name,
+          photoURL: formData.url,
+        })
+          .then(() => {
+            // Profile updated!
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .catch((error) => {
+        // setError(error.message);
+        console.log(error.message);
+      });
   };
 
   return (

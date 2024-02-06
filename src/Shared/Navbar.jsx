@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { MdLogout } from "react-icons/md";
-import { FaTimes } from "react-icons/fa";
+import { MdLogout, MdOutlineLogin } from "react-icons/md";
+// import { FaTimes } from "react-icons/fa";
 
 import logo from "../assets/monchobi.png";
 
@@ -10,13 +10,21 @@ import { useState } from "react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user } = useAuth();
+  const { user, logOut } = useAuth();
 
   const handleMenuOpen = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleSignOut = () => {};
+  const handleSignOut = () => {
+    logOut()
+      .then(() => {
+        // Sign-out successful.
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  };
 
   const active = {
     color: "yellow",
@@ -59,16 +67,12 @@ const Navbar = () => {
       <div className="navbar-start">
         <div onClick={() => handleMenuOpen()} className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden ">
-            {isOpen ? (
-              <FaTimes color="white" size={26} />
-            ) : (
-              <GiHamburgerMenu color="white" size={26} />
-            )}
+            <GiHamburgerMenu color="white" size={26} />
           </div>
           {isOpen && (
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 -ml-2 z-[30] p-8 shadow bg-pink-800 w-56 my-3 rounded-md h-96 space-y-2"
+              className="menu menu-sm dropdown-content mt-2 -ml-2 z-[30] p-8 shadow bg-pink-800 w-56 my-3 rounded-br-xl rounded-bl-xl h-96 space-y-2"
             >
               {navItems}
             </ul>
@@ -109,10 +113,13 @@ const Navbar = () => {
           </div>
         ) : (
           <NavLink
-            to="/signIn"
+            to="/login"
             style={({ isActive }) => (isActive ? active : inactive)}
           >
-            <button className="btn btn-sm">Sign In</button>
+            <button className="btn btn-outline text-white">
+              <MdOutlineLogin size={22} />
+              Login
+            </button>
           </NavLink>
         )}
       </div>

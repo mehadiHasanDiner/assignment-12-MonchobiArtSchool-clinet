@@ -4,8 +4,10 @@ import { useForm } from "react-hook-form";
 import { FaRegEyeSlash } from "react-icons/fa6";
 import { useState } from "react";
 import { FaRegEye } from "react-icons/fa";
+import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
+  const { signInUser, loggedInByGoogle } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -19,10 +21,28 @@ const Login = () => {
   };
 
   const onSubmit = (formData) => {
-    console.log(formData);
+    const email = formData.email;
+    const password = formData.password;
+    signInUser(email, password)
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+      })
+      .then((error) => {
+        console.log(error.message);
+      });
   };
 
-  const handleGoogleLogin = () => {};
+  const handleGoogleLogin = () => {
+    loggedInByGoogle()
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+      })
+      .then((error) => {
+        console.log(error.message);
+      });
+  };
 
   return (
     <div className="mt-8 bg">
