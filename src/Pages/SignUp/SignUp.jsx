@@ -7,40 +7,54 @@ import useAuth from "../../hooks/useAuth";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [error, setError] = useState("");
   const { createUser, updateLoggedInUser } = useAuth();
 
   const {
     register,
     handleSubmit,
-    // watch,
+    reset,
     formState: { errors },
   } = useForm();
 
-  const handleShowPassword = () => {
+  const handlePassword = () => {
     setShowPassword(!showPassword);
   };
 
+  const handleConfirmPassword = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
+
   const onSubmit = (formData) => {
+    setError("");
+
     const email = formData.email;
     const password = formData.password;
-    createUser(email, password)
-      .then((result) => {
-        const loggedUser = result.user;
-        updateLoggedInUser(loggedUser, {
-          displayName: formData.name,
-          photoURL: formData.url,
-        })
-          .then(() => {
-            // Profile updated!
+    const confirmPassword = formData.confirmPassword;
+    if (password !== confirmPassword) {
+      setError("Your password is not matched");
+    } else {
+      createUser(email, password)
+        .then((result) => {
+          reset();
+          const loggedUser = result.user;
+          updateLoggedInUser(loggedUser, {
+            displayName: formData.name,
+            photoURL: formData.url,
           })
-          .catch((error) => {
-            console.log(error);
-          });
-      })
-      .catch((error) => {
-        // setError(error.message);
-        console.log(error.message);
-      });
+            .then(() => {
+              // Profile updated!
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        })
+        .catch((error) => {
+          // setError(error.message);
+          setError(error.message);
+        });
+    }
   };
 
   return (
@@ -93,7 +107,7 @@ const SignUp = () => {
                 className="input input-bordered"
               />
               <p
-                onClick={() => handleShowPassword()}
+                onClick={() => handlePassword()}
                 className="absolute right-4 bottom-[13px] cursor-pointer"
               >
                 {showPassword ? (
@@ -106,6 +120,27 @@ const SignUp = () => {
                 <p className="text-red-600 mt-1">Please check the Password.</p>
               )} */}
             </div>
+            <div className="form-control relative">
+              <label className="label">
+                <span className="label-text">Confirm Password</span>
+              </label>
+              <input
+                {...register("confirmPassword", { required: true })}
+                type={showConfirmPassword ? "text" : "password"}
+                placeholder="confirm password"
+                className="input input-bordered"
+              />
+              <p
+                onClick={() => handleConfirmPassword()}
+                className="absolute right-4 bottom-[13px] cursor-pointer"
+              >
+                {showConfirmPassword ? (
+                  <FaRegEye size={20} />
+                ) : (
+                  <FaRegEyeSlash size={20} />
+                )}
+              </p>
+            </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Photo URL</span>
@@ -116,9 +151,6 @@ const SignUp = () => {
                 placeholder="Photo Url"
                 className="input input-bordered"
               />
-              {/* {errors.password && (
-                <p className="text-red-600 mt-1">Please check the Password.</p>
-              )}             */}
             </div>
             <span className="text-warning text-center"></span>
             <div className="form-control">
@@ -126,6 +158,8 @@ const SignUp = () => {
                 Sign Up
               </button>
             </div>
+            <p className="text-red-600 mt-1 text-center">{error}</p>
+
             {/* <span className="text-success text-center"> success</span> */}
 
             <label className="label">
