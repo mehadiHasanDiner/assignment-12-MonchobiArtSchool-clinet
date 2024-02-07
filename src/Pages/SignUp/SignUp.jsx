@@ -33,7 +33,7 @@ const SignUp = () => {
     const password = formData.password;
     const confirmPassword = formData.confirmPassword;
     if (password !== confirmPassword) {
-      setError("Your password is not matched");
+      setError("Password & Confirm Password didn't match");
     } else {
       createUser(email, password)
         .then((result) => {
@@ -156,6 +156,8 @@ const SignUp = () => {
                 )}
               </p>
             </div>
+            <p className="text-red-600 mt-1 text-center">{error}</p>
+
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Photo URL</span>
@@ -167,13 +169,11 @@ const SignUp = () => {
                 className="input input-bordered"
               />
             </div>
-            <span className="text-warning text-center"></span>
             <div className="form-control">
               <button className="btn bg-pink-800 hover:bg-black text-white  capitalize text-lg">
                 Sign Up
               </button>
             </div>
-            <p className="text-red-600 mt-1 text-center">{error}</p>
 
             {/* <span className="text-success text-center"> success</span> */}
 
