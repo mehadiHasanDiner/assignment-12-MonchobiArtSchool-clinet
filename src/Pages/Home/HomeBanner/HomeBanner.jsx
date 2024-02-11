@@ -1,15 +1,51 @@
 import { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectCube } from "swiper/modules";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "swiper/css/effect-cube";
+
 import "./HomeBanner.css";
 
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
 const HomeBanner = () => {
+  const sliderData = [
+    {
+      id: 1,
+      imageUrl:
+        "https://images.unsplash.com/photo-1512253080918-79cf0c2e0650?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      text: "Beautiful landscape view of mountains",
+    },
+    {
+      id: 2,
+      imageUrl:
+        "https://plus.unsplash.com/premium_photo-1664303256304-a16bffdb08bf?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      text: "Adorable puppies playing in the park",
+    },
+    {
+      id: 3,
+      imageUrl:
+        "https://images.unsplash.com/photo-1501349800519-48093d60bde0?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      text: "Delicious and colorful assortment of fruits",
+    },
+    {
+      id: 4,
+      imageUrl:
+        "https://plus.unsplash.com/premium_photo-1663050956267-fa2f5f905862?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      text: "Spectacular night skyline of a city",
+    },
+    {
+      id: 5,
+      imageUrl:
+        "https://plus.unsplash.com/premium_photo-1661274147103-367dd0b3f0f8?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      text: "Cute kittens cuddling together",
+    },
+  ];
+
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
   const onAutoplayTimeLeft = (s, time, progress) => {
@@ -23,34 +59,29 @@ const HomeBanner = () => {
         spaceBetween={30}
         centeredSlides={true}
         autoplay={{
-          delay: 2500,
+          delay: 3500,
           disableOnInteraction: false,
         }}
         pagination={{
           clickable: true,
         }}
         navigation={true}
-        modules={[Autoplay, Pagination, Navigation]}
+        modules={[Autoplay, Pagination, Navigation, EffectCube]}
         onAutoplayTimeLeft={onAutoplayTimeLeft}
         className="mySwiper"
+        effect="cube"
       >
-        <SwiperSlide>
-          <div>
-            <p>Slide 1</p>
-            <img
-              src="https://www.usnews.com/object/image/00000182-f077-d602-a5f6-f7f7dc4f0001/gettyimages-522459576.jpg?update-time=1661891762352&size=responsive640"
-              alt=""
-            />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
-        <SwiperSlide>Slide 5</SwiperSlide>
-        <SwiperSlide>Slide 6</SwiperSlide>
-        <SwiperSlide>Slide 7</SwiperSlide>
-        <SwiperSlide>Slide 8</SwiperSlide>
-        <SwiperSlide>Slide 9</SwiperSlide>
+        {sliderData.map((slider) => (
+          <SwiperSlide key={slider.id}>
+            <div className="w-full">
+              <p className="absolute bottom-2/4 left-2/4 text-white">
+                {slider.text}
+              </p>
+              <img className="w-full" src={slider.imageUrl} alt="" />
+            </div>
+          </SwiperSlide>
+        ))}
+
         <div className="autoplay-progress" slot="container-end">
           <svg viewBox="0 0 48 48" ref={progressCircle}>
             <circle cx="24" cy="24" r="20"></circle>
