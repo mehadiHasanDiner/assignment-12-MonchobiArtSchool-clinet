@@ -73,11 +73,15 @@ const HomeBanner = () => {
       >
         {sliderData.map((slider) => (
           <SwiperSlide key={slider.id}>
-            <div className="w-full">
-              <p className="absolute bottom-2/4 left-2/4 text-white">
-                {slider.text}
-              </p>
+            <div className="w-full relative">
               <img className="w-full" src={slider.imageUrl} alt="" />
+              <div className="bg-gradient-to-l from-neutral-950   opacity-80 w-full h-full absolute top-0"></div>
+              <div className="text-white w-1/2 absolute top-0 md:top-1/3 right-0 p-8 lg:top-1/4">
+                <h3 className=" text-2xl lg:text-7xl ">{slider.text}</h3>
+                <p className=" text-xl mt-6">
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. ?
+                </p>
+              </div>
             </div>
           </SwiperSlide>
         ))}
