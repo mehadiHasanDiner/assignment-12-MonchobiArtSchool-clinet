@@ -3,9 +3,9 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { MdLogout, MdOutlineLogin } from "react-icons/md";
 // import { FaTimes } from "react-icons/fa";
 
-import logo from "../assets/monchobi.png";
+import logo from "../../assets/monchobi.png";
 
-import useAuth from "../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
 
 const Navbar = () => {
