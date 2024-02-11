@@ -47,17 +47,25 @@ const Navbar = () => {
       <NavLink
         className="mr-6 "
         style={({ isActive }) => (isActive ? active : inactive)}
-        to="/login"
+        to="/instructors"
       >
-        Login
+        Instructors
       </NavLink>
 
       <NavLink
         className="mr-6 "
         style={({ isActive }) => (isActive ? active : inactive)}
-        to="/blogs"
+        to="/classes"
       >
-        Blogs
+        Classes
+      </NavLink>
+
+      <NavLink
+        className="mr-6 "
+        style={({ isActive }) => (isActive ? active : inactive)}
+        to="/dashboard"
+      >
+        Dashboard
       </NavLink>
     </>
   );
