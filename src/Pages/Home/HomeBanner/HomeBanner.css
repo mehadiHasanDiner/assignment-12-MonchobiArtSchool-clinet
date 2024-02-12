@@ -13,7 +13,16 @@
   align-items: center;
 }
 
+.swiper-button-prev {
+  --swiper-theme-color: white;
+}
+.swiper-button-next {
+  --swiper-theme-color: white;
+}
 
+.swiper-pagination-bullet {
+  --swiper-theme-color: white;
+}
 
 .autoplay-progress {
   position: absolute;

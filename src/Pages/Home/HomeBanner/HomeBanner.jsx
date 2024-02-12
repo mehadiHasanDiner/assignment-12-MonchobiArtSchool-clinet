@@ -1,12 +1,12 @@
 import { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectCube } from "swiper/modules";
+import { EffectCoverflow } from "swiper/modules";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import "swiper/css/effect-cube";
+import "swiper/css/effect-coverflow";
 
 import "./HomeBanner.css";
 
@@ -66,16 +66,16 @@ const HomeBanner = () => {
           clickable: true,
         }}
         navigation={true}
-        modules={[Autoplay, Pagination, Navigation, EffectCube]}
+        modules={[Autoplay, Pagination, Navigation, EffectCoverflow]}
         onAutoplayTimeLeft={onAutoplayTimeLeft}
         className="mySwiper"
-        effect="cube"
+        effect="coverflow"
       >
         {sliderData.map((slider) => (
           <SwiperSlide key={slider.id}>
-            <div className="w-full relative">
+            <div className="w-full relative next-icon">
               <img className="w-full" src={slider.imageUrl} alt="" />
-              <div className="bg-gradient-to-l from-neutral-950   opacity-80 w-full h-full absolute top-0"></div>
+              <div className="bg-gradient-to-l from-neutral-950 opacity-80 w-full h-full absolute top-0"></div>
               <div className="text-white w-1/2 absolute top-0 md:top-1/3 right-0 p-8 lg:top-1/4">
                 <h3 className=" text-2xl lg:text-7xl ">{slider.text}</h3>
                 <p className=" text-xl mt-6">
