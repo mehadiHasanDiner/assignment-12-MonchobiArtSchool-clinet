@@ -1,14 +1,17 @@
 import Cover from "../../Shared/Cover/Cover";
+import ClassCard from "../../components/ClassCard/ClassCard";
+import painting from "../../assets/painting.png";
 
 const Classes = () => {
   return (
-    <div>
-      <Cover
-        coverImage1="https://www.seekpng.com/png/detail/125-1252822_28-collection-of-butterfly-border-clipart-png-clip.png"
-        coverImage2="https://clipart-library.com/newhp/Text-Banner-PNG-Clipart.png"
-        heading={"heading"}
-      ></Cover>
-    </div>
+    <>
+      <div>
+        <Cover heading={"heading"}></Cover>
+      </div>
+      <div className="mt-8">
+        <ClassCard img={painting}></ClassCard>
+      </div>
+    </>
   );
 };
 
