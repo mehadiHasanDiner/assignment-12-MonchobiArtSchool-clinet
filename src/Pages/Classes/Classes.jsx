@@ -9,7 +9,6 @@ const Classes = () => {
   const [classesData, setClassesData] = useState();
 
   useEffect(() => {
-    console.log(import.meta.env.VITE_URL_KEY);
     fetch(`${import.meta.env.VITE_URL_KEY}/classes`)
       .then((res) => res.json())
       .then((data) => {
