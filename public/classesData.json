@@ -1,0 +1,44 @@
+[
+    {
+        "nameOfClass": "Oil Painting",
+        "img": "https://i.ibb.co/3W0dLgF/oil-painting.png",
+        "instructor": "John Smith",
+        "availableSeat": 15,
+        "feeAmount": 200
+    },
+    {
+        "nameOfClass": "Watercolor Techniques",
+        "img": "https://i.ibb.co/WyyYzgt/watercolor.png",
+        "instructor": "Emily Johnson",
+        "availableSeat": 10,
+        "feeAmount": 180
+    },
+    {
+        "nameOfClass": "Life Drawing",
+        "img": "https://i.ibb.co/0mSK1sp/life-drawing.png",
+        "instructor": "Michael Brown",
+        "availableSeat": 12,
+        "feeAmount": 220
+    },
+    {
+        "nameOfClass": "Sculpture",
+        "img": "https://i.ibb.co/J2VDRTB/sculpting.png",
+        "instructor": "Sarah Thompson",
+        "availableSeat": 8,
+        "feeAmount": 250
+    },
+    {
+        "nameOfClass": "Photography Basics",
+        "img": "https://i.ibb.co/HDV5dgc/photography.png",
+        "instructor": "David Wilson",
+        "availableSeat": 20,
+        "feeAmount": 150
+    },
+    {
+        "nameOfClass": "Digital Art",
+        "img": "https://i.ibb.co/9tTSPFZ/digital-art.png",
+        "instructor": "Emma Davis",
+        "availableSeat": 18,
+        "feeAmount": 230
+    }
+]

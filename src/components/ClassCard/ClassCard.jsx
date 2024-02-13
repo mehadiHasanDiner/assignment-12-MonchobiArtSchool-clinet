@@ -1,14 +1,19 @@
+import { useLocation } from "react-router-dom";
+
 const ClassCard = ({
   img,
   nameOfClass,
   instructor,
   availableSeats,
   amount,
-  handleEnrollClass,
 }) => {
   const handleEnrollClass = () => {
     console.log("clicked ");
   };
+
+  const location = useLocation();
+  // console.log(location.pathname);
+
   return (
     <div className="card w-96 bg-orange-100 shadow-xl">
       <figure>
@@ -20,9 +25,15 @@ const ClassCard = ({
         <p>Total Seat: {availableSeats}</p>
         <p> Registration Fee: ${amount}</p>
         <div className="card-actions justify-end">
-          <button onClick={handleEnrollClass} className="btn btn-primary">
-            Enroll Now
-          </button>
+          {location.pathname === "/" ? (
+            ""
+          ) : (
+            <>
+              <button onClick={handleEnrollClass} className="btn btn-primary">
+                Enroll Now
+              </button>
+            </>
+          )}
         </div>
       </div>
     </div>
