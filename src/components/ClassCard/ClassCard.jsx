@@ -1,11 +1,6 @@
-import {
-  Navigate,
-  useLocation,
-  useNavigate,
-  redirect,
-  useLoaderData,
-} from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const ClassCard = ({
   img,
@@ -18,21 +13,60 @@ const ClassCard = ({
   const { user } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
-  const loader = useLoaderData();
-  // console.log(location.pathname);
-  // const from = location.state?.from?.pathname || "";
-
-  // const navigateToLogin = () => {
-  //   if (!user) {
-  //     return redirect("/login");
-  //   }
-  // };
 
   const handleEnrollClass = () => {
-    if (!user) {
-      // user
+    if (user && user.email) {
+      const studentCart = {
+        classId: id,
+        img,
+        nameOfClass,
+        instructor,
+        feeAmount,
+        email: user.email,
+        enrollmentDate: new Date(),
+      };
+
+      fetch(`${import.meta.env.VITE_URL_KEY}/enrolled/${id}`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(studentCart),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          Swal.fire({
+            title: `Successfully Enrolled into ${nameOfClass} class`,
+            html: "Go to dashboard for details",
+            icon: "Success",
+            confirmButtonColor: "#28a745",
+            confirmButtonText: "Dashboard",
+            showCloseButton: true,
+            showDenyButton: true,
+            denyButtonText: "Payment",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate("/dashboard");
+              console.log(data);
+            }
+            if (result.isDenied) {
+              navigate("/payment");
+            }
+          });
+        });
     } else {
-      return redirect("/");
+      Swal.fire({
+        title: "Please login for Enrolling into the Class",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Login Now!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login", { state: { from: location } });
+        }
+      });
     }
   };
 
