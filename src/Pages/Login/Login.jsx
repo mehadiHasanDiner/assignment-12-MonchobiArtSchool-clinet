@@ -1,14 +1,21 @@
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { FaRegEyeSlash } from "react-icons/fa6";
 import { useState } from "react";
 import { FaRegEye } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
+import { ImSpinner9 } from "react-icons/im";
+import toast from "react-hot-toast";
 
 const Login = () => {
+  const { loading, setLoading } = useAuth();
   const { signInUser, loggedInByGoogle } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "";
 
   const {
     register,
@@ -27,9 +34,12 @@ const Login = () => {
       .then((result) => {
         const loggedUser = result.user;
         console.log(loggedUser);
+        navigate(from, { replace: true });
       })
       .then((error) => {
-        console.log(error.message);
+        setLoading(false);
+        console.log(error?.message);
+        toast.error(error?.message);
       });
   };
 
@@ -38,9 +48,12 @@ const Login = () => {
       .then((result) => {
         const loggedUser = result.user;
         console.log(loggedUser);
+        navigate(from, { replace: true });
       })
       .then((error) => {
+        setLoading(false);
         console.log(error.message);
+        toast.error(error.message);
       });
   };
 
@@ -100,7 +113,17 @@ const Login = () => {
             <span className="text-warning text-center"></span>
             <div className="form-control">
               <button className="btn bg-pink-800 hover:bg-black text-white capitalize text-lg">
-                Sign in
+                {loading ? (
+                  <>
+                    <ImSpinner9
+                      className="m-auto animate-spin"
+                      size={24}
+                      color="white"
+                    />
+                  </>
+                ) : (
+                  "Sign in"
+                )}
               </button>
             </div>
 
@@ -122,7 +145,19 @@ const Login = () => {
               onClick={handleGoogleLogin}
               className="btn btn-neutral capitalize text-md"
             >
-              <FcGoogle className="text-2xl" /> Sign In with Google
+              {loading ? (
+                <>
+                  <ImSpinner9
+                    className="m-auto animate-spin"
+                    size={24}
+                    color="white"
+                  />
+                </>
+              ) : (
+                <>
+                  <FcGoogle className="text-2xl" /> Sign In with Google
+                </>
+              )}
             </button>
           </div>
         </div>

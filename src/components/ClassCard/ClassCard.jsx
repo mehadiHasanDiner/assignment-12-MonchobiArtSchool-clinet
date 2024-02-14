@@ -1,4 +1,11 @@
-import { useLocation } from "react-router-dom";
+import {
+  Navigate,
+  useLocation,
+  useNavigate,
+  redirect,
+  useLoaderData,
+} from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const ClassCard = ({
   img,
@@ -6,16 +13,36 @@ const ClassCard = ({
   instructor,
   availableSeat,
   feeAmount,
+  id,
 }) => {
+  const { user } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const loader = useLoaderData();
+  // console.log(location.pathname);
+  // const from = location.state?.from?.pathname || "";
+
+  // const navigateToLogin = () => {
+  //   if (!user) {
+  //     return redirect("/login");
+  //   }
+  // };
+
   const handleEnrollClass = () => {
-    console.log("clicked ");
+    if (!user) {
+      // user
+    } else {
+      return redirect("/");
+    }
   };
 
-  const location = useLocation();
-  // console.log(location.pathname);
-
   return (
-    <div className="card w-full bg-orange-100 shadow-xl">
+    <div
+      className={
+        "card w-full  shadow-xl " +
+        (availableSeat > 0 ? "bg-orange-100" : "bg-red-700")
+      }
+    >
       <figure>
         <img className="w-3/12 mt-3" src={img} alt="Shoes" />
       </figure>
@@ -29,7 +56,12 @@ const ClassCard = ({
             ""
           ) : (
             <>
-              <button onClick={handleEnrollClass} className="btn btn-primary">
+              <button
+                onClick={handleEnrollClass}
+                className={
+                  availableSeat > 0 ? "btn btn-primary" : " btn btn-disabled"
+                }
+              >
                 Enroll Now
               </button>
             </>

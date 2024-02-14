@@ -27,10 +27,9 @@ const Classes = () => {
             instructor={data?.instructor}
             availableSeat={data?.availableSeat}
             feeAmount={data?.feeAmount}
+            id={data?._id}
           ></ClassCard>
         ))}
-
-        
       </div>
     </>
   );
