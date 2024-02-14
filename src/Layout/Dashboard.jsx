@@ -3,7 +3,7 @@ import { TfiMenuAlt } from "react-icons/tfi";
 const Dashboard = () => {
   return (
     <>
-      <div className="relative bg-slate-400 max-w-full pt-10"></div>
+      <div className="relative bg-slate-300 max-w-full pt-10"></div>
       <div className="drawer lg:drawer-open ">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
 
