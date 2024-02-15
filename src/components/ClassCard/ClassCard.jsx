@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import useEnrollCart from "../../hooks/useEnrollCart";
 
 const ClassCard = ({
   img,
@@ -13,6 +14,9 @@ const ClassCard = ({
   const { user } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
+  const [enrolledCart] = useEnrollCart();
+  const classTitle = enrolledCart.map((enroll) => enroll.nameOfClass);
+  const isClassNameContain = classTitle.includes(nameOfClass);
 
   const handleEnrollClass = () => {
     if (user && user.email) {
@@ -36,9 +40,9 @@ const ClassCard = ({
         .then((res) => res.json())
         .then((data) => {
           Swal.fire({
-            title: `Successfully Enrolled into ${nameOfClass} class`,
+            title: `Successfully Added the ${nameOfClass} class`,
             html: "Go to dashboard for details",
-            icon: "Success",
+            icon: "success",
             confirmButtonColor: "#28a745",
             confirmButtonText: "Dashboard",
             showCloseButton: true,
@@ -93,10 +97,14 @@ const ClassCard = ({
               <button
                 onClick={handleEnrollClass}
                 className={
-                  availableSeat > 0 ? "btn btn-primary" : " btn btn-disabled"
+                  availableSeat > 0
+                    ? isClassNameContain
+                      ? "btn btn-disabled"
+                      : "btn btn-primary"
+                    : " btn btn-disabled"
                 }
               >
-                Enroll Now
+                {isClassNameContain ? "Enrolled" : "Enroll Now"}
               </button>
             </>
           )}

@@ -21,6 +21,7 @@ const Classes = () => {
       <div className="my-8 grid grid-cols-1 md:grid-cols-2 gap-8 w-full lg:grid-cols-3">
         {classesData.map((data) => (
           <ClassCard
+            id={data._id}
             key={data._id}
             img={data?.img}
             nameOfClass={data?.nameOfClass}
