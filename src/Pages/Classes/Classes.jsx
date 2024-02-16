@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 const Classes = () => {
   const [classesData, setClassesData] = useState([]);
+  const [load, setLoad] = useState(false);
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_URL_KEY}/classes`)
@@ -12,7 +13,7 @@ const Classes = () => {
         setClassesData(data);
         console.log(data);
       });
-  }, []);
+  }, [load]);
   return (
     <>
       <div>
@@ -28,6 +29,8 @@ const Classes = () => {
             instructor={data?.instructor}
             availableSeat={data?.availableSeat}
             feeAmount={data?.feeAmount}
+            setLoad={setLoad}
+            load={load}
           ></ClassCard>
         ))}
       </div>

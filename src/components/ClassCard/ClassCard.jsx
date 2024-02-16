@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
-import useEnrollCart from "../../hooks/useEnrollCart";
+import useSelectCart from "../../hooks/useSelectCart";
 
 const ClassCard = ({
   img,
@@ -10,12 +10,15 @@ const ClassCard = ({
   availableSeat,
   feeAmount,
   id,
+  load,
+  setLoad,
 }) => {
   const { user } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
-  const [enrolledCart] = useEnrollCart();
-  const classTitle = enrolledCart.map((enroll) => enroll.nameOfClass);
+  const [selectedCart, refetch] = useSelectCart();
+
+  const classTitle = selectedCart.map((enroll) => enroll.nameOfClass);
   const isClassNameContain = classTitle.includes(nameOfClass);
 
   const handleEnrollClass = () => {
@@ -30,7 +33,7 @@ const ClassCard = ({
         enrollmentDate: new Date(),
       };
 
-      fetch(`${import.meta.env.VITE_URL_KEY}/enrolled/${id}`, {
+      fetch(`${import.meta.env.VITE_URL_KEY}/selected/${id}`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -40,7 +43,7 @@ const ClassCard = ({
         .then((res) => res.json())
         .then((data) => {
           Swal.fire({
-            title: `Successfully Added the ${nameOfClass} class`,
+            title: `Successfully Selected the ${nameOfClass} class`,
             html: "Go to dashboard for details",
             icon: "success",
             confirmButtonColor: "#28a745",
@@ -50,13 +53,16 @@ const ClassCard = ({
             denyButtonText: "Payment",
           }).then((result) => {
             if (result.isConfirmed) {
-              navigate("/dashboard");
+              navigate("/dashboard/selectedClass");
+
               console.log(data);
             }
             if (result.isDenied) {
-              navigate("/payment");
+              navigate("/dashboard/selectedClass");
             }
           });
+          setLoad(!load);
+          refetch();
         });
     } else {
       Swal.fire({
@@ -78,7 +84,7 @@ const ClassCard = ({
     <div
       className={
         "card w-full  shadow-xl " +
-        (availableSeat > 0 ? "bg-orange-100" : "bg-red-700")
+        (availableSeat > 0 ? "bg-orange-100" : "bg-red-600")
       }
     >
       <figure>
@@ -104,7 +110,7 @@ const ClassCard = ({
                     : " btn btn-disabled"
                 }
               >
-                {isClassNameContain ? "Enrolled" : "Enroll Now"}
+                {isClassNameContain ? "Selected" : "Enroll Now"}
               </button>
             </>
           )}

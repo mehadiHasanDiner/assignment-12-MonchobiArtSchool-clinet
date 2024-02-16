@@ -63,7 +63,7 @@ const Navbar = () => {
       <NavLink
         className="mr-6 "
         style={({ isActive }) => (isActive ? active : inactive)}
-        to="/dashboard"
+        to="dashboard/selectedClass"
       >
         Dashboard
       </NavLink>

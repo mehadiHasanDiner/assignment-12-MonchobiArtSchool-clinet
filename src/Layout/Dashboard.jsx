@@ -41,11 +41,20 @@ const Dashboard = () => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+          <ul className="menu p-4 w-48 min-h-full bg-base-200 text-base-content">
             {/* Sidebar content here */}
 
             {/* for student or normal user */}
-            <li>
+            <li className="">
+              <NavLink
+                style={({ isActive }) => (isActive ? active : inactive)}
+                to="/classes"
+              >
+                Classes
+              </NavLink>
+            </li>
+
+            <li className="my-2">
               <NavLink
                 style={({ isActive }) => (isActive ? active : inactive)}
                 to="selectedClass"
@@ -53,10 +62,10 @@ const Dashboard = () => {
                 Selected Classes
               </NavLink>
             </li>
-            <li className="my-2">
+            <li>
               <NavLink
                 style={({ isActive }) => (isActive ? active : inactive)}
-                to="enrolledClass"
+                to="selectedClass"
               >
                 Enrolled Classes
               </NavLink>

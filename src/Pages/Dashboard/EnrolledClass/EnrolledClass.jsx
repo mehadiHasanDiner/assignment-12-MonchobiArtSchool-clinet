@@ -1,7 +1,7 @@
 const EnrolledClass = () => {
   return (
     <div>
-      <p>after payment enrolled</p>
+      <p>after payment selected</p>
     </div>
   );
 };
