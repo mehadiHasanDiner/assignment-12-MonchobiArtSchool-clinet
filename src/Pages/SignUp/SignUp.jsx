@@ -1,15 +1,22 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegEyeSlash } from "react-icons/fa6";
 import { FaRegEye } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
+import { saveUsers } from "../../hooks/useApi/useApi";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState("");
   const { createUser, updateLoggedInUser } = useAuth();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "";
 
   const {
     register,
@@ -44,7 +51,9 @@ const SignUp = () => {
             photoURL: formData.url,
           })
             .then(() => {
-              // Profile updated!
+              toast.success("user created successfully");
+              saveUsers(result.user);
+              navigate(from, { replace: true });
             })
             .catch((error) => {
               console.log(error);

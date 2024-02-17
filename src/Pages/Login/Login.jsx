@@ -7,6 +7,7 @@ import { FaRegEye } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 import { ImSpinner9 } from "react-icons/im";
 import toast from "react-hot-toast";
+import { saveUsers } from "../../hooks/useApi/useApi";
 
 const Login = () => {
   const { loading, setLoading } = useAuth();
@@ -46,8 +47,11 @@ const Login = () => {
   const handleGoogleLogin = () => {
     loggedInByGoogle()
       .then((result) => {
+        toast.success("user logged in successfully");
         const loggedUser = result.user;
-        console.log(loggedUser);
+        // console.log(loggedUser);
+        saveUsers(loggedUser);
+
         navigate(from, { replace: true });
       })
       .then((error) => {
