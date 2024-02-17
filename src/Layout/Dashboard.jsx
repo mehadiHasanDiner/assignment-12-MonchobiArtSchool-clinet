@@ -65,7 +65,7 @@ const Dashboard = () => {
             <li>
               <NavLink
                 style={({ isActive }) => (isActive ? active : inactive)}
-                to="selectedClass"
+                to="enrolledClass"
               >
                 Enrolled Classes
               </NavLink>

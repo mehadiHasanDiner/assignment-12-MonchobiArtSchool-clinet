@@ -2,16 +2,61 @@ import useSelectCart from "../../../hooks/useSelectCart";
 import { GiCancel } from "react-icons/gi";
 
 import { FaWallet } from "react-icons/fa6";
+import Swal from "sweetalert2";
 
 const SelectedClass = () => {
-  const [selectedCart] = useSelectCart();
-  const handleDeleteClass = (id) => {
-    console.log("first delete" + id);
+  const [selectedCart, refetch] = useSelectCart();
+
+  const total = selectedCart.reduce((sum, item) => sum + item.feeAmount, 0);
+
+  const handleDeleteClass = (selected) => {
+    Swal.fire({
+      title: "Are you sure you want to cancel your Selected Class?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "purple",
+      confirmButtonText: "Yes! Cancel It",
+      cancelButtonText: "I Ignore",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`${import.meta.env.VITE_URL_KEY}/selected/${selected._id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+              refetch();
+              Swal.fire({
+                title: "Canceled!",
+                text: "Your selected class has been canceled successfully.",
+                icon: "success",
+              });
+            }
+          });
+      }
+    });
+  };
+
+  const handleMakePayment = () => {
+    console.log("first make payment");
   };
 
   return (
     <div>
-      <p>this is my select class route {selectedCart?.length}</p>
+      <div className="flex justify-evenly items-center my-4 py-2 bg-slate-200">
+        <h3 className="text-center font-bold">
+          Total Class Selected: {selectedCart?.length}
+        </h3>
+        <h3 className="text-center font-bold">Total Fees: ${total}</h3>
+        <button
+          onClick={handleMakePayment}
+          className="btn btn-outline btn-neutral btn-sm "
+        >
+          <FaWallet />
+          Pay
+        </button>
+      </div>
 
       <div className="overflow-x-auto">
         <table className="table">
@@ -49,12 +94,8 @@ const SelectedClass = () => {
                 <td>{selected?.instructor}</td>
                 <td>${selected?.feeAmount}</td>
                 <th>
-                  <button className="btn btn-outline btn-success btn-xs  mr-1 ">
-                    <FaWallet />
-                    Pay
-                  </button>
                   <button
-                    onClick={() => handleDeleteClass(selected?._id)}
+                    onClick={() => handleDeleteClass(selected)}
                     className="btn btn-outline btn-error btn-xs"
                   >
                     <GiCancel />
