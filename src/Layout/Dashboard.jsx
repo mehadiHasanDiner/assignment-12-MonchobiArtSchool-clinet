@@ -3,6 +3,10 @@ import { PiStudentBold } from "react-icons/pi";
 import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
+  const isUser = false;
+  const isInstructor = false;
+  const isAdmin = true;
+
   const active = {
     color: "",
     fontWeight: "bold",
@@ -45,32 +49,38 @@ const Dashboard = () => {
             {/* Sidebar content here */}
 
             {/* for student or normal user */}
-            <li className="my-2">
-              <NavLink
-                style={({ isActive }) => (isActive ? active : inactive)}
-                to="selectedClass"
-              >
-                Selected Classes
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                style={({ isActive }) => (isActive ? active : inactive)}
-                to="enrolledClass"
-              >
-                Enrolled Classes
-              </NavLink>
-            </li>
+            {isUser && (
+              <>
+                <li className="my-2">
+                  <NavLink
+                    style={({ isActive }) => (isActive ? active : inactive)}
+                    to="selectedClass"
+                  >
+                    Selected Classes
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    style={({ isActive }) => (isActive ? active : inactive)}
+                    to="enrolledClass"
+                  >
+                    Enrolled Classes
+                  </NavLink>
+                </li>
+              </>
+            )}
 
             {/* for admin */}
-            <li className="my-2">
-              <NavLink
-                style={({ isActive }) => (isActive ? active : inactive)}
-                to="allusers"
-              >
-                All Users
-              </NavLink>
-            </li>
+            {isAdmin && (
+              <li className="my-2">
+                <NavLink
+                  style={({ isActive }) => (isActive ? active : inactive)}
+                  to="allusers"
+                >
+                  All Users
+                </NavLink>
+              </li>
+            )}
 
             {/* common for all */}
             <hr className="border-t-2 border-gray-300 my-4"></hr>

@@ -2,9 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
 import { MdDeleteForever } from "react-icons/md";
 import { MdAdminPanelSettings } from "react-icons/md";
+import { PiChalkboardTeacher } from "react-icons/pi";
+import Swal from "sweetalert2";
 
 const AllUsers = () => {
-  const { data: users = [] } = useQuery({
+  const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       const res = await fetch(`${import.meta.env.VITE_URL_KEY}/users`);
@@ -16,7 +18,27 @@ const AllUsers = () => {
     console.log(user);
   };
 
-  const handleMakeAdmin = (user) => {};
+  const handleMakeAdmin = (user) => {
+    fetch(`${import.meta.env.VITE_URL_KEY}/users/admin/${user._id}`, {
+      method: "PATCH",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount) {
+          refetch();
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: `${user.name} is an Admin Now!`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
+  };
+  const handleMakeInstructor = () => {};
+
   return (
     <div>
       <Helmet>
@@ -31,7 +53,7 @@ const AllUsers = () => {
               <th>#</th>
               <th>Name</th>
               <th>Email</th>
-              <th>Role</th>
+              <th>Make user role as</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -45,20 +67,42 @@ const AllUsers = () => {
                   {user?.role === "admin" ? (
                     "Admin"
                   ) : (
-                    <button
-                      className="btn bg-green-500 btn-outline"
-                      onClick={() => handleMakeAdmin()}
-                    >
-                      <MdAdminPanelSettings size={26} />
-                    </button>
+                    <>
+                      {user?.role === "instructor" ? (
+                        ""
+                      ) : (
+                        <button
+                          className="btn bg-orange-200 btn-outline btn-xs"
+                          onClick={() => handleMakeAdmin(user)}
+                        >
+                          <MdAdminPanelSettings /> Admin
+                        </button>
+                      )}
+                    </>
+                  )}
+                  {user?.role === "instructor" ? (
+                    "Instructor"
+                  ) : (
+                    <>
+                      {user?.role === "admin" ? (
+                        ""
+                      ) : (
+                        <button
+                          className="btn bg-orange-200 btn-outline btn-xs ml-2"
+                          onClick={() => handleMakeInstructor(user._id)}
+                        >
+                          <PiChalkboardTeacher /> Instructor
+                        </button>
+                      )}
+                    </>
                   )}
                 </td>
                 <td>
                   <button
                     onClick={() => handleDeleteUser(user)}
-                    className="btn btn-ghost bg-red-600  hover:bg-orange-600"
+                    className="btn bg-red-600  btn-outline"
                   >
-                    <MdDeleteForever size={20} color="white" />
+                    <MdDeleteForever size={18} color="white" />
                   </button>
                 </td>
               </tr>
