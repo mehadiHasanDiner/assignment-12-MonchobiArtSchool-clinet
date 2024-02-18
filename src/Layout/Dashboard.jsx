@@ -1,6 +1,6 @@
 import { TfiMenuAlt } from "react-icons/tfi";
 import { PiStudentBold } from "react-icons/pi";
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
   const active = {
@@ -45,15 +45,6 @@ const Dashboard = () => {
             {/* Sidebar content here */}
 
             {/* for student or normal user */}
-            <li className="">
-              <NavLink
-                style={({ isActive }) => (isActive ? active : inactive)}
-                to="/classes"
-              >
-                Classes
-              </NavLink>
-            </li>
-
             <li className="my-2">
               <NavLink
                 style={({ isActive }) => (isActive ? active : inactive)}
@@ -69,6 +60,25 @@ const Dashboard = () => {
               >
                 Enrolled Classes
               </NavLink>
+            </li>
+
+            {/* for admin */}
+            <li className="my-2">
+              <NavLink
+                style={({ isActive }) => (isActive ? active : inactive)}
+                to="allusers"
+              >
+                All Users
+              </NavLink>
+            </li>
+
+            {/* common for all */}
+            <hr className="border-t-2 border-gray-300 my-4"></hr>
+            <li>
+              <NavLink to="/">Home</NavLink>
+            </li>
+            <li>
+              <NavLink to="/classes">Classes</NavLink>
             </li>
           </ul>
         </div>
