@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
-import { MdDeleteForever } from "react-icons/md";
 import { MdAdminPanelSettings } from "react-icons/md";
 import { PiChalkboardTeacher } from "react-icons/pi";
 import Swal from "sweetalert2";
@@ -15,10 +14,6 @@ const AllUsers = () => {
     },
   });
 
-  const handleDeleteUser = (user) => {
-    console.log(user);
-  };
-
   const handleMakeAdmin = (user) => {
     makeAdmin(user?.email).then((data) => {
       console.log(data);
@@ -27,9 +22,12 @@ const AllUsers = () => {
         Swal.fire({
           position: "center",
           icon: "success",
+          iconColor: "crimson",
           title: `${user.name} is Admin Now!`,
           showConfirmButton: false,
           timer: 1500,
+          background: "purple",
+          color: "white",
         });
       }
     });
@@ -42,9 +40,13 @@ const AllUsers = () => {
         Swal.fire({
           position: "center",
           icon: "success",
+          iconColor: "crimson",
+
           title: `${user.name} is Instructor Now!`,
           showConfirmButton: false,
           timer: 1500,
+          background: "purple",
+          color: "white",
         });
       }
     });
@@ -62,16 +64,25 @@ const AllUsers = () => {
           <thead>
             <tr>
               <th>#</th>
+              <th> User Image</th>
               <th>Name</th>
               <th>Email</th>
               <th>User Role</th>
-              <th>Action</th>
             </tr>
           </thead>
           <tbody>
             {users.map((user, index) => (
               <tr key={user?._id}>
                 <th>{index + 1}</th>
+                <td>
+                  <div className="flex items-center gap-3">
+                    <div className="avatar">
+                      <div className="mask mask-squircle w-12 h-12">
+                        <img src={user.photoURL} alt="Class Theme Image" />
+                      </div>
+                    </div>
+                  </div>
+                </td>
                 <td>{user?.name}</td>
                 <td>{user?.email}</td>
                 <td>
@@ -86,10 +97,10 @@ const AllUsers = () => {
                         ""
                       ) : (
                         <button
-                          className="btn bg-orange-200 btn-outline btn-xs"
+                          className="btn bg-orange-200 btn-outline btn-sm"
                           onClick={() => handleMakeAdmin(user)}
                         >
-                          <MdAdminPanelSettings /> Admin
+                          <MdAdminPanelSettings size={16} /> Admin
                         </button>
                       )}
                     </>
@@ -105,22 +116,14 @@ const AllUsers = () => {
                         ""
                       ) : (
                         <button
-                          className="btn bg-orange-200 btn-outline btn-xs ml-2"
+                          className="btn bg-orange-200 btn-outline btn-sm ml-2"
                           onClick={() => handleMakeInstructor(user)}
                         >
-                          <PiChalkboardTeacher /> Instructor
+                          <PiChalkboardTeacher size={16} /> Instructor
                         </button>
                       )}
                     </>
                   )}
-                </td>
-                <td>
-                  <button
-                    onClick={() => handleDeleteUser(user)}
-                    className="btn bg-red-600  btn-outline"
-                  >
-                    <MdDeleteForever size={18} color="white" />
-                  </button>
                 </td>
               </tr>
             ))}

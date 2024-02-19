@@ -18,6 +18,8 @@ const SelectedClass = () => {
       cancelButtonColor: "purple",
       confirmButtonText: "Yes! Cancel It",
       cancelButtonText: "I Ignore",
+      background: "brown",
+      color: "white",
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(`${import.meta.env.VITE_URL_KEY}/selected/${selected._id}`, {
@@ -31,6 +33,8 @@ const SelectedClass = () => {
                 title: "Canceled!",
                 text: "Your selected class has been canceled successfully.",
                 icon: "success",
+                background: "brown",
+                color: "white",
               });
             }
           });

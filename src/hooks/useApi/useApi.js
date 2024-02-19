@@ -3,6 +3,7 @@ export const saveUsers = (user) => {
   const createdUsers = {
     name: user.displayName,
     email: user.email,
+    photoURL: user.photoURL,
   };
   fetch(`${import.meta.env.VITE_URL_KEY}/users/${user?.email}`, {
     method: "PUT",
@@ -44,3 +45,10 @@ export const makeInstructor = (email) => {
 };
 
 // get user role
+export const getRole = async (email) => {
+  const response = await fetch(
+    `${import.meta.env.VITE_URL_KEY}/users/${email}`
+  );
+  const user = await response.json();
+  return user?.role;
+};

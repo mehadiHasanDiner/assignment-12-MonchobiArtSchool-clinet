@@ -1,11 +1,15 @@
 import { TfiMenuAlt } from "react-icons/tfi";
 import { PiStudentBold } from "react-icons/pi";
 import { NavLink, Outlet } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 const Dashboard = () => {
-  const isUser = false;
-  const isInstructor = false;
-  const isAdmin = true;
+  // const isUser = false;
+  // const isInstructor = false;
+  // const isAdmin = true;
+
+  const { role } = useAuth();
+  console.log(role);
 
   const active = {
     color: "",
@@ -48,38 +52,61 @@ const Dashboard = () => {
           <ul className="menu p-4 w-48 min-h-full bg-base-200 text-base-content">
             {/* Sidebar content here */}
 
-            {/* for student or normal user */}
-            {isUser && (
+            {role === "admin" ? (
               <>
+                {/* for admin */}
                 <li className="my-2">
                   <NavLink
                     style={({ isActive }) => (isActive ? active : inactive)}
-                    to="selectedClass"
+                    to="allusers"
                   >
-                    Selected Classes
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    style={({ isActive }) => (isActive ? active : inactive)}
-                    to="enrolledClass"
-                  >
-                    Enrolled Classes
+                    Manage Users
                   </NavLink>
                 </li>
               </>
-            )}
-
-            {/* for admin */}
-            {isAdmin && (
-              <li className="my-2">
-                <NavLink
-                  style={({ isActive }) => (isActive ? active : inactive)}
-                  to="allusers"
-                >
-                  All Users
-                </NavLink>
-              </li>
+            ) : (
+              <>
+                {role === "instructor" ? (
+                  <>
+                    <li>
+                      <NavLink
+                        style={({ isActive }) => (isActive ? active : inactive)}
+                        to="addclass"
+                      >
+                        Add a Class
+                      </NavLink>
+                    </li>
+                    <li className="my-2">
+                      <NavLink
+                        style={({ isActive }) => (isActive ? active : inactive)}
+                        to="myclass"
+                      >
+                        My Class
+                      </NavLink>
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    {/* for student or normal user */}
+                    <li className="my-2">
+                      <NavLink
+                        style={({ isActive }) => (isActive ? active : inactive)}
+                        to="selectedClass"
+                      >
+                        Selected Classes
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        style={({ isActive }) => (isActive ? active : inactive)}
+                        to="enrolledClass"
+                      >
+                        Enrolled Classes
+                      </NavLink>
+                    </li>
+                  </>
+                )}
+              </>
             )}
 
             {/* common for all */}

@@ -5,7 +5,7 @@ import { FaRegEyeSlash } from "react-icons/fa6";
 import { FaRegEye } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 import { saveUsers } from "../../hooks/useApi/useApi";
-import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -43,6 +43,16 @@ const SignUp = () => {
     } else {
       createUser(email, password)
         .then((result) => {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            iconColor: "#fabee4",
+            title: "User created Successfully",
+            showConfirmButton: false,
+            timer: 2000,
+            background: "crimson",
+            color: "white",
+          });
           reset();
           const loggedUser = result.user;
           updateLoggedInUser(loggedUser, {
@@ -50,7 +60,6 @@ const SignUp = () => {
             photoURL: formData.url,
           })
             .then(() => {
-              toast.success("user created successfully");
               saveUsers(result.user);
               navigate(from, { replace: true });
             })
