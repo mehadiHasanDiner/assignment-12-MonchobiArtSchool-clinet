@@ -4,6 +4,7 @@ import { MdDeleteForever } from "react-icons/md";
 import { MdAdminPanelSettings } from "react-icons/md";
 import { PiChalkboardTeacher } from "react-icons/pi";
 import Swal from "sweetalert2";
+import { makeAdmin, makeInstructor } from "../../../hooks/useApi/useApi";
 
 const AllUsers = () => {
   const { data: users = [], refetch } = useQuery({
@@ -19,25 +20,35 @@ const AllUsers = () => {
   };
 
   const handleMakeAdmin = (user) => {
-    fetch(`${import.meta.env.VITE_URL_KEY}/users/admin/${user._id}`, {
-      method: "PATCH",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.modifiedCount) {
-          refetch();
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: `${user.name} is an Admin Now!`,
-            showConfirmButton: false,
-            timer: 1500,
-          });
-        }
-      });
+    makeAdmin(user?.email).then((data) => {
+      console.log(data);
+      if (data.modifiedCount) {
+        refetch();
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: `${user.name} is Admin Now!`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
   };
-  const handleMakeInstructor = () => {};
+  const handleMakeInstructor = (user) => {
+    makeInstructor(user?.email).then((data) => {
+      console.log(data);
+      if (data.modifiedCount) {
+        refetch();
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: `${user.name} is Instructor Now!`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
+  };
 
   return (
     <div>
@@ -53,7 +64,7 @@ const AllUsers = () => {
               <th>#</th>
               <th>Name</th>
               <th>Email</th>
-              <th>Make user role as</th>
+              <th>User Role</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -65,7 +76,7 @@ const AllUsers = () => {
                 <td>{user?.email}</td>
                 <td>
                   {user?.role === "admin" ? (
-                    "Admin"
+                    <p className="font-bold">Admin</p>
                   ) : (
                     <>
                       {user?.role === "instructor" ? (
@@ -81,7 +92,7 @@ const AllUsers = () => {
                     </>
                   )}
                   {user?.role === "instructor" ? (
-                    "Instructor"
+                    <p className="font-bold">Instructor</p>
                   ) : (
                     <>
                       {user?.role === "admin" ? (
@@ -89,7 +100,7 @@ const AllUsers = () => {
                       ) : (
                         <button
                           className="btn bg-orange-200 btn-outline btn-xs ml-2"
-                          onClick={() => handleMakeInstructor(user._id)}
+                          onClick={() => handleMakeInstructor(user)}
                         >
                           <PiChalkboardTeacher /> Instructor
                         </button>

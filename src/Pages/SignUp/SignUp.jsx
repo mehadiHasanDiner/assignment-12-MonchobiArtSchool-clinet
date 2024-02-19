@@ -4,7 +4,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegEyeSlash } from "react-icons/fa6";
 import { FaRegEye } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
-import Swal from "sweetalert2";
 import { saveUsers } from "../../hooks/useApi/useApi";
 import toast from "react-hot-toast";
 
