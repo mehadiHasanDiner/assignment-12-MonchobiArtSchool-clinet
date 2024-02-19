@@ -1,4 +1,4 @@
-// saving user for changing the usr role
+// saving user for changing their role
 export const saveUsers = (user) => {
   const createdUsers = {
     name: user.displayName,
@@ -42,3 +42,5 @@ export const makeInstructor = (email) => {
     body: JSON.stringify(currentUser),
   }).then((res) => res.json());
 };
+
+// get user role

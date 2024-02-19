@@ -76,7 +76,10 @@ const AllUsers = () => {
                 <td>{user?.email}</td>
                 <td>
                   {user?.role === "admin" ? (
-                    <p className="font-bold">Admin</p>
+                    <p className="font-bold flex items-center gap-1">
+                      {" "}
+                      <MdAdminPanelSettings size={20} /> Admin
+                    </p>
                   ) : (
                     <>
                       {user?.role === "instructor" ? (
@@ -92,7 +95,10 @@ const AllUsers = () => {
                     </>
                   )}
                   {user?.role === "instructor" ? (
-                    <p className="font-bold">Instructor</p>
+                    <p className="font-bold flex items-center gap-1">
+                      <PiChalkboardTeacher size={20} />
+                      Instructor
+                    </p>
                   ) : (
                     <>
                       {user?.role === "admin" ? (
