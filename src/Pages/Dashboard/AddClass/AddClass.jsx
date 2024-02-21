@@ -82,7 +82,7 @@ const AddClass = () => {
           </label>
           <input
             type="file"
-            className="file-input file-input-bordered file-input-md w-full max-w-xs"
+            className="file-input file-input-secondary file-input-md w-full max-w-xs"
             {...register("img")}
             required={true}
           />
@@ -137,7 +137,9 @@ const AddClass = () => {
           />
         </div>
         <div className="form-control mt-6">
-          <button className="btn btn-primary">Add Class</button>
+          <button className="btn btn-outline bg-pink-700 hover:bg-pink-500 text-white text-lg font-bold">
+            Add Class
+          </button>
         </div>
       </form>
     </div>

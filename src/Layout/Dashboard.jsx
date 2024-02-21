@@ -3,7 +3,6 @@ import { NavLink, Outlet } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { AiFillDashboard } from "react-icons/ai";
 
-
 const Dashboard = () => {
   // const isUser = false;
   // const isInstructor = false;
@@ -63,12 +62,20 @@ const Dashboard = () => {
             {role === "admin" ? (
               <>
                 {/* for admin */}
-                <li className="my-2">
+                <li>
                   <NavLink
                     style={({ isActive }) => (isActive ? active : inactive)}
                     to="allusers"
                   >
                     Manage Users
+                  </NavLink>
+                </li>
+                <li className="my-2">
+                  <NavLink
+                    style={({ isActive }) => (isActive ? active : inactive)}
+                    to="allclasses"
+                  >
+                    Manage Classes
                   </NavLink>
                 </li>
               </>
