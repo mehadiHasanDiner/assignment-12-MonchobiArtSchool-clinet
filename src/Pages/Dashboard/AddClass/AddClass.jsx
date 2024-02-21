@@ -8,8 +8,8 @@ const AddClass = () => {
   const {
     register,
     handleSubmit,
-    watch,
-    formState: { errors },
+    // watch,
+    // formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => {
