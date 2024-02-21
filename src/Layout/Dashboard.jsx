@@ -1,7 +1,8 @@
 import { TfiMenuAlt } from "react-icons/tfi";
-import { PiStudentBold } from "react-icons/pi";
 import { NavLink, Outlet } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import { AiFillDashboard } from "react-icons/ai";
+
 
 const Dashboard = () => {
   // const isUser = false;
@@ -22,9 +23,16 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="relative bg-slate-300 max-w-full py-2 font-bold flex pl-3">
-        <PiStudentBold size={24} />{" "}
-        <span className="pl-2">Student Dashboard</span>
+      <div className="relative bg-pink-700 max-w-full py-2 font-bold flex pl-3">
+        <AiFillDashboard size={24} color="white" />
+        <span className="pl-2 text-white">
+          {role === "admin" ? (
+            "Admin"
+          ) : (
+            <>{role === "instructor" ? "Instructor" : "Student"}</>
+          )}{" "}
+          Dashboard
+        </span>
       </div>
       <div className="drawer lg:drawer-open ">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -37,9 +45,9 @@ const Dashboard = () => {
 
           <label
             htmlFor="my-drawer-2"
-            className=" absolute -top-9 right-3 cursor-pointer hover:bg-slate-500 hover:text-white px-2 py-1 drawer-button lg:hidden rounded"
+            className=" absolute -top-9 right-3 cursor-pointer hover:bg-pink-600  px-2 py-1 drawer-button lg:hidden rounded"
           >
-            <TfiMenuAlt size={24} />
+            <TfiMenuAlt color="white" size={24} />
           </label>
         </div>
 
@@ -49,7 +57,7 @@ const Dashboard = () => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu p-4 w-48 min-h-full bg-base-200 text-base-content">
+          <ul className="menu p-4 w-48 min-h-full bg-pink-200 text-base-content">
             {/* Sidebar content here */}
 
             {role === "admin" ? (
@@ -110,7 +118,7 @@ const Dashboard = () => {
             )}
 
             {/* common for all */}
-            <hr className="border-t-2 border-gray-300 my-4"></hr>
+            <hr className="border-t-2 border-gray-500 my-4"></hr>
             <li>
               <NavLink to="/">Home</NavLink>
             </li>

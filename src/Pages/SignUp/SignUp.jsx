@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegEyeSlash } from "react-icons/fa6";
 import { FaRegEye } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
-import { saveUsers } from "../../hooks/useApi/useApi";
+import { saveUsers } from "../../hooks/utils/useApi";
 import Swal from "sweetalert2";
 
 const SignUp = () => {

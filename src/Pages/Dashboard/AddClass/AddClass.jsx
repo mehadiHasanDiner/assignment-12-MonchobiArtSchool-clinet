@@ -8,11 +8,11 @@ const AddClass = () => {
       <form className="card-body">
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Class Name</span>
+            <span className="label-text">Class Title</span>
           </label>
           <input
             type="text"
-            placeholder="class name"
+            placeholder="class title"
             className="input input-bordered"
           />
         </div>

@@ -10,7 +10,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import app from "../firebase/firebase.config";
-import { getRole } from "../hooks/useApi/useApi";
+import { getRole } from "../hooks/utils/useApi";
 
 export const AuthContext = createContext(null);
 

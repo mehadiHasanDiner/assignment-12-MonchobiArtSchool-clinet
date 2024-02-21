@@ -7,7 +7,8 @@ import { FaRegEye } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 import { ImSpinner9 } from "react-icons/im";
 import toast from "react-hot-toast";
-import { saveUsers } from "../../hooks/useApi/useApi";
+
+import { saveUsers } from "../../hooks/utils/useApi";
 
 const Login = () => {
   const { loading, setLoading } = useAuth();
@@ -20,6 +21,7 @@ const Login = () => {
 
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm();
@@ -33,11 +35,13 @@ const Login = () => {
     const password = formData.password;
     signInUser(email, password)
       .then((result) => {
+        toast.success("User Logged in Successfully");
+        reset();
         const loggedUser = result.user;
         console.log(loggedUser);
         navigate(from, { replace: true });
       })
-      .then((error) => {
+      .catch((error) => {
         setLoading(false);
         console.log(error?.message);
         toast.error(error?.message);
@@ -54,10 +58,10 @@ const Login = () => {
 
         navigate(from, { replace: true });
       })
-      .then((error) => {
+      .catch((error) => {
         setLoading(false);
-        console.log(error.message);
         toast.error(error.message);
+        console.log(error.message);
       });
   };
 

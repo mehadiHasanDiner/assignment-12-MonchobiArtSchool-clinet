@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { MdAdminPanelSettings } from "react-icons/md";
 import { PiChalkboardTeacher } from "react-icons/pi";
 import Swal from "sweetalert2";
-import { makeAdmin, makeInstructor } from "../../../hooks/useApi/useApi";
+import { makeAdmin, makeInstructor } from "../../../hooks/utils/useApi";
 
 const AllUsers = () => {
   const { data: users = [], refetch } = useQuery({
