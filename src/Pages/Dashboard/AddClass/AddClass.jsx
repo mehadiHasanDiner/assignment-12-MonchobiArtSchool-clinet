@@ -1,6 +1,7 @@
 import useAuth from "../../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import { imageUpload } from "../../../hooks/utils/imageUpload";
+import Swal from "sweetalert2";
 
 const AddClass = () => {
   const { user } = useAuth();
@@ -8,6 +9,7 @@ const AddClass = () => {
   const {
     register,
     handleSubmit,
+    reset,
     // watch,
     // formState: { errors },
   } = useForm();
@@ -26,15 +28,41 @@ const AddClass = () => {
           feeAmount: totalFee,
           availableSeat: totalSeat,
           img: imgUrl,
+          status: "pending",
         };
-        console.log(newClass);
+        fetch(`${import.meta.env.VITE_URL_KEY}/newClass`, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(newClass),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            reset();
+            console.log(data);
+            if (data.insertedId) {
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                iconColor: "crimson",
+                title: `${nameOfClass} class added successfully!`,
+                showConfirmButton: false,
+                timer: 1500,
+                background: "purple",
+                color: "white",
+              });
+            }
+          });
       }
     });
   };
 
   return (
     <div>
-      <p>Add a class route</p>
+      <p className="text-3xl font-bold text-pink-700 mt-4 -mb-4">
+        Add a New Class
+      </p>
       <form onSubmit={handleSubmit(onSubmit)} className="card-body">
         <div className="form-control">
           <label className="label">
@@ -109,7 +137,7 @@ const AddClass = () => {
           />
         </div>
         <div className="form-control mt-6">
-          <button className="btn btn-primary">Login</button>
+          <button className="btn btn-primary">Add Class</button>
         </div>
       </form>
     </div>

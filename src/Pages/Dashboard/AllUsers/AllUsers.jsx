@@ -5,7 +5,7 @@ import { PiChalkboardTeacher } from "react-icons/pi";
 import Swal from "sweetalert2";
 import { makeAdmin, makeInstructor } from "../../../hooks/utils/useApi";
 
-const AllUsers = () => {
+const ManageUsers = () => {
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
@@ -134,4 +134,4 @@ const AllUsers = () => {
   );
 };
 
-export default AllUsers;
+export default ManageUsers;
