@@ -62,7 +62,15 @@ const MyClass = () => {
                 <td>{myClass?.availableSeat}</td>
                 <td>${myClass?.feeAmount}</td>
                 <td className=" mt-6">
-                  <p className="capitalize badge  badge-warning">
+                  <p
+                    className={
+                      myClass?.status === "Approved"
+                        ? "capitalize badge badge-success mt-6"
+                        : myClass?.status === "Denied"
+                        ? "capitalize badge badge-error mt-6"
+                        : "capitalize badge badge-warning mt-6"
+                    }
+                  >
                     {myClass?.status}
                   </p>
                   <p className="italic mt-2 ml-2">{myClass?.feedback}</p>

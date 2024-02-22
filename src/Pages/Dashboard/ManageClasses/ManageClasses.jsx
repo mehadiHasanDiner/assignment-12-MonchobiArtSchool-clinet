@@ -1,13 +1,34 @@
 import { useQuery } from "@tanstack/react-query";
+import { setApprovedDenied } from "../../../hooks/utils/useStatus";
+import Swal from "sweetalert2";
 
 const ManageClasses = () => {
-  const { refecth, data: allClassesData = [] } = useQuery({
+  const { refetch, data: allClassesData = [] } = useQuery({
     queryKey: ["allClasses"],
     queryFn: async () => {
       const res = await fetch(`${import.meta.env.VITE_URL_KEY}/allClasses`);
       return res.json();
     },
   });
+
+  const handleApproveClass = (id) => {
+    setApprovedDenied(id, "Approved").then((data) => {
+      if (data.modifiedCount > 0) {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          iconColor: "#fabee4",
+          title: "Status Updated Successfully",
+          showConfirmButton: false,
+          timer: 2000,
+          background: "crimson",
+          color: "white",
+        });
+      }
+      refetch();
+    });
+  };
+
   return (
     <div>
       <p className="text-center text-2xl font-bold capitalize text-pink-700 my-6">
@@ -54,20 +75,38 @@ const ManageClasses = () => {
                 <td>{classData?.email}</td>
                 <td>{classData?.availableSeat}</td>
                 <td>${classData?.feeAmount}</td>
-                <td className="capitalize badge badge-warning mt-6">
+                <td
+                  className={
+                    classData?.status === "Approved"
+                      ? "capitalize badge badge-success mt-6"
+                      : classData?.status === "Denied"
+                      ? "capitalize badge badge-error mt-6"
+                      : "capitalize badge badge-warning mt-6"
+                  }
+                >
                   {classData?.status}
                 </td>
                 <th>
                   <div className="flex gap-1">
                     <button
-                      onClick={() => handleApproveClass(classData)}
-                      className="btn btn-outline btn-success btn-xs"
+                      onClick={() => handleApproveClass(classData?._id)}
+                      className={
+                        classData?.status === "Denied" ||
+                        classData?.status === "Approved"
+                          ? "btn btn-xs btn-disabled"
+                          : "btn btn-outline btn-success btn-xs"
+                      }
                     >
                       Approved
                     </button>
                     <button
                       onClick={() => handleDenyClass(classData)}
-                      className="btn btn-outline btn-error btn-xs"
+                      className={
+                        classData?.status === "Denied" ||
+                        classData?.status === "Approved"
+                          ? "btn btn-xs btn-disabled"
+                          : "btn btn-outline btn-success btn-xs"
+                      }
                     >
                       Deny
                     </button>
