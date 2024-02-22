@@ -9,7 +9,7 @@ export const setApprovedDenied = (id, status) => {
 };
 
 export const sendFeedback = (id, feedback) => {
-  return fetch(`${import.meta.env.VITE_URL_KEY}/allClasses/${id}`, {
+  return fetch(`${import.meta.env.VITE_URL_KEY}/allClasses/feedback/${id}`, {
     method: "PUT",
     headers: {
       "content-type": "application/json",

@@ -65,9 +65,9 @@ const MyClass = () => {
                   <p
                     className={
                       myClass?.status === "Approved"
-                        ? "capitalize badge badge-success mt-6"
+                        ? "capitalize badge badge-success mt-6 text-white"
                         : myClass?.status === "Denied"
-                        ? "capitalize badge badge-error mt-6"
+                        ? "capitalize badge badge-error mt-6 text-white"
                         : "capitalize badge badge-warning mt-6"
                     }
                   >
