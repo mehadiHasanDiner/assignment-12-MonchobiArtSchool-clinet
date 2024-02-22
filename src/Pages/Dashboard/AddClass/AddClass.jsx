@@ -118,7 +118,7 @@ const AddClass = () => {
           </label>
           <input
             type="number"
-            placeholder="price"
+            placeholder="Reg. fee"
             className="input input-bordered"
             {...register("feeAmount")}
             required={true}
