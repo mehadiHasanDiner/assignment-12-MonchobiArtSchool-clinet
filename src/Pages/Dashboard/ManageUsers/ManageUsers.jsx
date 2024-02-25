@@ -8,6 +8,7 @@ import { makeAdmin, makeInstructor } from "../../../hooks/utils/useApi";
 const ManageUsers = () => {
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
+
     queryFn: async () => {
       const res = await fetch(`${import.meta.env.VITE_URL_KEY}/users`);
       return res.json();
