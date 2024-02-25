@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "./useAxiosSecure";
 
 const usePostedClass = () => {
   const { refetch, data: allClassesData = [] } = useQuery({
     queryKey: ["allClasses"],
     queryFn: async () => {
-      const res = await fetch(`${import.meta.env.VITE_URL_KEY}/allClasses`);
-      return res.json();
+      const res = await useAxiosSecure.get("/allClasses");
+      return res.data;
     },
   });
   return [allClassesData, refetch];

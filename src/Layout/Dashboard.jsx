@@ -2,13 +2,15 @@ import { TfiMenuAlt } from "react-icons/tfi";
 import { NavLink, Outlet } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { AiFillDashboard } from "react-icons/ai";
+import useUserRole from "../hooks/useUserRole";
 
 const Dashboard = () => {
   // const isUser = false;
   // const isInstructor = false;
   // const isAdmin = true;
 
-  const { role } = useAuth();
+  const { user } = useAuth();
+  const role = useUserRole(user?.email);
   console.log(role);
 
   const active = {

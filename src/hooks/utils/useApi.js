@@ -45,10 +45,10 @@ export const makeInstructor = (email) => {
 };
 
 // get user role
-export const getRole = async (email) => {
-  const response = await fetch(
-    `${import.meta.env.VITE_URL_KEY}/users/${email}`
-  );
-  const user = await response.json();
-  return user?.role;
-};
+// export const getRole = async (email) => {
+//   const response = await fetch(
+//     `${import.meta.env.VITE_URL_KEY}/users/${email}`
+//   );
+//   const user = await response.json();
+//   return user?.role;
+// };

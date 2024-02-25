@@ -4,14 +4,14 @@ import { MdAdminPanelSettings } from "react-icons/md";
 import { PiChalkboardTeacher } from "react-icons/pi";
 import Swal from "sweetalert2";
 import { makeAdmin, makeInstructor } from "../../../hooks/utils/useApi";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const ManageUsers = () => {
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
-
     queryFn: async () => {
-      const res = await fetch(`${import.meta.env.VITE_URL_KEY}/users`);
-      return res.json();
+      const res = await useAxiosSecure.get("/users");
+      return res.data;
     },
   });
 
