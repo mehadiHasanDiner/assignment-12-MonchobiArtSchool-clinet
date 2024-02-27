@@ -121,7 +121,17 @@ const Login = () => {
             <span className="text-warning text-center"></span>
             <div className="form-control">
               <button className="btn bg-pink-800 hover:bg-black text-white capitalize text-lg">
-                Sign in
+                {loading ? (
+                  <>
+                    <ImSpinner9
+                      className="m-auto animate-spin"
+                      size={24}
+                      color="white"
+                    />
+                  </>
+                ) : (
+                  "Sign in"
+                )}
               </button>
             </div>
 
@@ -142,7 +152,19 @@ const Login = () => {
               onClick={handleGoogleLogin}
               className="btn btn-neutral capitalize text-md"
             >
-              <FcGoogle className="text-2xl" /> Sign In with Google
+              {loading ? (
+                <>
+                  <ImSpinner9
+                    className="m-auto animate-spin"
+                    size={24}
+                    color="white"
+                  />
+                </>
+              ) : (
+                <>
+                  <FcGoogle className="text-2xl" /> Sign In with Google
+                </>
+              )}
             </button>
           </div>
         </div>

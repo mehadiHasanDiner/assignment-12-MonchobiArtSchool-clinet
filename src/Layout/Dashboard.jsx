@@ -1,18 +1,15 @@
 import { TfiMenuAlt } from "react-icons/tfi";
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { AiFillDashboard } from "react-icons/ai";
 import useUserRole from "../hooks/useUserRole";
+import DashboardTest from "../Pages/Dashboard/Dashboard/DashboardTest";
 
 const Dashboard = () => {
-  const { loading } = useAuth();
-  // const isUser = false;
-  // const isInstructor = false;
-  // const isAdmin = true;
-
   const { user } = useAuth();
   const role = useUserRole(user?.email);
-  console.log(role);
+  // console.log(role);
+  const location = useLocation();
 
   const active = {
     color: "",
@@ -22,8 +19,6 @@ const Dashboard = () => {
   const inactive = {
     color: "black",
   };
-
-  console.log(loading);
 
   return (
     <>
@@ -38,13 +33,18 @@ const Dashboard = () => {
           Dashboard
         </span>
       </div>
+
       <div className="drawer lg:drawer-open ">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
 
         <div className="drawer-content">
           {/* Page content here */}
           <div className="px-8 my-2">
-            <Outlet></Outlet>
+            {location.pathname === "/dashboard" ? (
+              <DashboardTest></DashboardTest>
+            ) : (
+              <Outlet></Outlet>
+            )}
           </div>
 
           <label
@@ -63,6 +63,10 @@ const Dashboard = () => {
           ></label>
           <ul className="menu p-4 w-48 min-h-full bg-pink-200 text-base-content">
             {/* Sidebar content here */}
+
+            <li className="mb-2">
+              <Link to="/dashboard">Dashboard Home</Link>
+            </li>
 
             {role === "admin" ? (
               <>

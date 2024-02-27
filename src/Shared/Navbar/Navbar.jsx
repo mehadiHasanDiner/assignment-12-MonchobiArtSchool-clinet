@@ -1,7 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdLogout, MdOutlineLogin } from "react-icons/md";
-// import { FaTimes } from "react-icons/fa";
 
 import logo from "../../assets/monchobi.png";
 
@@ -10,6 +9,7 @@ import { useState } from "react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+
   const { user, logOut } = useAuth();
 
   const handleMenuOpen = () => {
@@ -22,7 +22,7 @@ const Navbar = () => {
         // Sign-out successful.
       })
       .catch((error) => {
-        // An error happened.
+        console.log(error);
       });
   };
 
@@ -63,7 +63,7 @@ const Navbar = () => {
       <NavLink
         className="mr-6 "
         style={({ isActive }) => (isActive ? active : inactive)}
-        to="dashboard/selectedClass"
+        to="/dashboard"
       >
         Dashboard
       </NavLink>

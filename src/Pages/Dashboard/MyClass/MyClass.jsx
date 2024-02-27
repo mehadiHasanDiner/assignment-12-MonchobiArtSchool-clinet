@@ -1,18 +1,24 @@
 import { useEffect, useState } from "react";
 import useAuth from "../../../hooks/useAuth";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const MyClass = () => {
   const [myClasses, setMyClasses] = useState([]);
   const { user } = useAuth();
+  const [axiosSecure] = useAxiosSecure();
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_URL_KEY}/allClasses/${user.email}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setMyClasses(data);
-        console.log(data);
+    axiosSecure
+      .get(`/allClasses/${user.email}`)
+      .then((res) => {
+        setMyClasses(res.data);
+        console.log(res.data);
+      })
+      .catch((error) => {
+        // Handle errors here
+        console.error("Error fetching classes:", error);
       });
-  }, [user]);
+  }, [user, axiosSecure]);
 
   return (
     <div>
