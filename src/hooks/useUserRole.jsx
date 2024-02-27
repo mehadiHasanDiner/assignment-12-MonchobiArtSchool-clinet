@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import useAxiosSecure from "./useAxiosSecure";
 
 const useUserRole = (email) => {
-  const axiosSecure = useAxiosSecure()[0];
+  const [axiosSecure] = useAxiosSecure();
   const [role, setRole] = useState(null);
 
   useEffect(() => {

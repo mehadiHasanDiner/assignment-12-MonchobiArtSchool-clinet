@@ -5,6 +5,7 @@ import { AiFillDashboard } from "react-icons/ai";
 import useUserRole from "../hooks/useUserRole";
 
 const Dashboard = () => {
+  const { loading } = useAuth();
   // const isUser = false;
   // const isInstructor = false;
   // const isAdmin = true;
@@ -21,6 +22,8 @@ const Dashboard = () => {
   const inactive = {
     color: "black",
   };
+
+  console.log(loading);
 
   return (
     <>

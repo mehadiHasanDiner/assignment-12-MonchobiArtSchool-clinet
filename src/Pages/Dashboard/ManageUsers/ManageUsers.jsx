@@ -7,10 +7,11 @@ import { makeAdmin, makeInstructor } from "../../../hooks/utils/useApi";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const ManageUsers = () => {
+  const [axiosSecure] = useAxiosSecure();
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await useAxiosSecure.get("/users");
+      const res = await axiosSecure.get("/users");
       return res.data;
     },
   });
