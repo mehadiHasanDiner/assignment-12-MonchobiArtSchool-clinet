@@ -1,14 +1,12 @@
 import { TfiMenuAlt } from "react-icons/tfi";
 import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
 import { AiFillDashboard } from "react-icons/ai";
 import useUserRole from "../hooks/useUserRole";
 import DashboardTest from "../Pages/Dashboard/Dashboard/DashboardTest";
 
 const Dashboard = () => {
-  const { user } = useAuth();
-  const role = useUserRole(user?.email);
-  // console.log(role);
+  const [isSecuredRole] = useUserRole();
+  console.log(isSecuredRole);
   const location = useLocation();
 
   const active = {
@@ -25,10 +23,10 @@ const Dashboard = () => {
       <div className="relative bg-pink-700 max-w-full py-2 font-bold flex pl-3">
         <AiFillDashboard size={24} color="white" />
         <span className="pl-2 text-white">
-          {role === "admin" ? (
+          {isSecuredRole === "admin" ? (
             "Admin"
           ) : (
-            <>{role === "instructor" ? "Instructor" : "Student"}</>
+            <>{isSecuredRole === "instructor" ? "Instructor" : "Student"}</>
           )}{" "}
           Dashboard
         </span>
@@ -68,7 +66,7 @@ const Dashboard = () => {
               <Link to="/dashboard">Dashboard Home</Link>
             </li>
 
-            {role === "admin" ? (
+            {isSecuredRole === "admin" ? (
               <>
                 {/* for admin */}
                 <li>
@@ -90,7 +88,7 @@ const Dashboard = () => {
               </>
             ) : (
               <>
-                {role === "instructor" ? (
+                {isSecuredRole === "instructor" ? (
                   <>
                     <li>
                       <NavLink

@@ -1,27 +1,20 @@
-import { useEffect, useState } from "react";
 import useAxiosSecure from "./useAxiosSecure";
+import useAuth from "./useAuth";
+import { useQuery } from "@tanstack/react-query";
 
-const useUserRole = (email) => {
+const useUserRole = () => {
   const [axiosSecure] = useAxiosSecure();
-  const [role, setRole] = useState(null);
+  const { user } = useAuth();
 
-  useEffect(() => {
-    const fetchRole = async () => {
-      await axiosSecure
-        .get(`/users/${email}`)
-        .then((response) => {
-          const user = response.data;
-          setRole(user?.role);
-        })
-        .catch((error) => {
-          console.error("Error fetching user data:", error);
-        });
-    };
-
-    fetchRole();
-  }, [axiosSecure, email]);
-
-  return role;
+  const { data: isSecuredRole, isLoading: isSecuredRoleLoading } = useQuery({
+    queryKey: ["isInstructorOrAdmin", user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/users/${user?.email}`);
+      console.log("is admin res", res);
+      return res.data.role;
+    },
+  });
+  return [isSecuredRole, isSecuredRoleLoading];
 };
 
 export default useUserRole;

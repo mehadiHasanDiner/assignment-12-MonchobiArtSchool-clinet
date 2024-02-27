@@ -9,7 +9,7 @@ const MyClass = () => {
 
   useEffect(() => {
     axiosSecure
-      .get(`/allClasses/${user.email}`)
+      .get(`/allClasses/${user?.email}`)
       .then((res) => {
         setMyClasses(res.data);
         console.log(res.data);

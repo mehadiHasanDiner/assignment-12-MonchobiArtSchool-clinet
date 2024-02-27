@@ -66,6 +66,7 @@ const SignUp = () => {
             .catch((error) => {
               console.log(error);
             });
+          reset();
         })
         .catch((error) => {
           // setError(error.message);

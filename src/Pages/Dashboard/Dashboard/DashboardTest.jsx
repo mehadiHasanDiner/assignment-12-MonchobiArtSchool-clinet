@@ -12,7 +12,7 @@ const DashboardTest = () => {
             Role: Admin
           </p>
           <p className="text-xl font-bold text-center">
-            Email: shakib@email.com
+            Email: shakib@khan.com
           </p>
           <p className="text-xl font-bold text-center">Password: 123Aa#</p>
 
