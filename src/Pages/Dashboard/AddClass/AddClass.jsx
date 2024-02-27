@@ -2,9 +2,11 @@ import useAuth from "../../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import { imageUpload } from "../../../hooks/utils/imageUpload";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const AddClass = () => {
   const { user } = useAuth();
+  const [axiosSecure] = useAxiosSecure();
 
   const {
     register,
@@ -30,30 +32,21 @@ const AddClass = () => {
           img: imgUrl,
           status: "pending",
         };
-        fetch(`${import.meta.env.VITE_URL_KEY}/newClass`, {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(newClass),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            reset();
-            console.log(data);
-            if (data.insertedId) {
-              Swal.fire({
-                position: "center",
-                icon: "success",
-                iconColor: "crimson",
-                title: `${nameOfClass} class added successfully!`,
-                showConfirmButton: false,
-                timer: 1500,
-                background: "purple",
-                color: "white",
-              });
-            }
+        axiosSecure.post("/newClass", newClass).then((res) => res.data);
+        console.log("after posting new item", data);
+        if (data.insertedId) {
+          reset();
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            iconColor: "crimson",
+            title: `${nameOfClass} class added successfully!`,
+            showConfirmButton: false,
+            timer: 1500,
+            background: "purple",
+            color: "white",
           });
+        }
       }
     });
   };

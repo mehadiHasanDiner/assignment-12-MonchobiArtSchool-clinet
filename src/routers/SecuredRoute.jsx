@@ -29,7 +29,7 @@ const SecuredRoute = ({ children, role }) => {
     return children; // Render the children for user route
   } else {
     // If the user's role doesn't match the route role, redirect to home
-    return <Navigate to="/login" state={{ from: location }} replace />;
+    return <Navigate to="/" state={{ from: location }} replace />;
   }
 };
 
