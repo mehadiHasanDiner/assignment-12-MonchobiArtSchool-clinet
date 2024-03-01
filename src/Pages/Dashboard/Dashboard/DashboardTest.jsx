@@ -17,9 +17,11 @@ const DashboardTest = () => {
           <p className="text-xl font-bold text-center">Password: 123Aa#</p>
 
           <p className="italic text-center">
-            N.B. Add more new classes as an instructor after changing the user
-            role as instructor. For changing the user role please go to{" "}
+            N.B. Add more new classes as an instructor. For changing the user
+            role as instructor, please use the above{" "}
+            <span className="underline">Email Id & Password</span> and go to
             <span className="text-pink-700">
+              {" "}
               <Link to="allusers">Manage Users</Link>
             </span>{" "}
             section

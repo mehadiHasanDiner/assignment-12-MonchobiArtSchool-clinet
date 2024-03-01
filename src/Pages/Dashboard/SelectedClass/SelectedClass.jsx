@@ -3,11 +3,18 @@ import { GiCancel } from "react-icons/gi";
 
 import { FaWallet } from "react-icons/fa6";
 import Swal from "sweetalert2";
+import { useState } from "react";
+import CheckoutModal from "../../../components/Modal/CheckoutModal";
 
 const SelectedClass = () => {
   const [selectedCart, refetch] = useSelectCart();
+  const [open, setOpen] = useState(false);
 
-  const total = selectedCart.reduce((sum, item) => sum + item.feeAmount, 0);
+  // const total = selectedCart.reduce((sum, item) => sum + item.feeAmount, 0);
+
+  const closeModal = () => {
+    setOpen(false);
+  };
 
   const handleDeleteClass = (selected) => {
     Swal.fire({
@@ -42,25 +49,21 @@ const SelectedClass = () => {
     });
   };
 
-  const handleMakePayment = () => {
-    console.log("first make payment");
-  };
-
   return (
     <div>
-      <div className="flex justify-evenly items-center my-4 py-2 bg-slate-200">
+      {/* <div className="flex justify-evenly items-center my-4 py-2 bg-slate-200">
         <h3 className="text-center font-bold">
           Total Class Selected: {selectedCart?.length}
         </h3>
         <h3 className="text-center font-bold">Total Fees: ${total}</h3>
         <button
-          onClick={handleMakePayment}
+          onClick={() => setOpen(true)}
           className="btn btn-outline btn-neutral btn-sm "
         >
           <FaWallet />
           Pay
         </button>
-      </div>
+      </div> */}
 
       <div className="overflow-x-auto">
         <table className="table">
@@ -77,36 +80,54 @@ const SelectedClass = () => {
           </thead>
           <tbody>
             {selectedCart.map((selected, index) => (
-              <tr key={index}>
-                <th>{index + 1}</th>
-                <td>
-                  <div className="flex items-center gap-3">
-                    <div className="avatar">
-                      <div className="mask mask-squircle w-12 h-12">
-                        <img src={selected.img} alt="Class Theme Image" />
+              <>
+                <tr key={index}>
+                  <th>{index + 1}</th>
+                  <td>
+                    <div className="flex items-center gap-3">
+                      <div className="avatar">
+                        <div className="mask mask-squircle w-12 h-12">
+                          <img src={selected.img} alt="Class Theme Image" />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </td>
-                <td>
-                  <div className="flex items-center gap-3">
-                    <div>
-                      <div className="font-bold">{selected?.nameOfClass} </div>
+                  </td>
+                  <td>
+                    <div className="flex items-center gap-3">
+                      <div>
+                        <div className="font-bold">
+                          {selected?.nameOfClass}{" "}
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </td>
-                <td>{selected?.instructor}</td>
-                <td>${selected?.feeAmount}</td>
-                <th>
-                  <button
-                    onClick={() => handleDeleteClass(selected)}
-                    className="btn btn-outline btn-error btn-xs"
-                  >
-                    <GiCancel />
-                    Cancel
-                  </button>
-                </th>
-              </tr>
+                  </td>
+                  <td>{selected?.instructor}</td>
+                  <td>${selected?.feeAmount}</td>
+                  <th>
+                    <button
+                      onClick={() => setOpen(true)}
+                      className="btn btn-outline mr-2 btn-success btn-xs"
+                    >
+                      <FaWallet />
+                      Pay
+                    </button>
+                    <button
+                      onClick={() => handleDeleteClass(selected)}
+                      className="btn btn-outline btn-error btn-xs"
+                    >
+                      <GiCancel />
+                      Cancel
+                    </button>
+                  </th>
+                </tr>
+
+                {/* checkout modal for payment*/}
+                <CheckoutModal
+                  selected={selected}
+                  isOpen={open}
+                  closeModal={closeModal}
+                ></CheckoutModal>
+              </>
             ))}
             {/* row 1 */}
           </tbody>

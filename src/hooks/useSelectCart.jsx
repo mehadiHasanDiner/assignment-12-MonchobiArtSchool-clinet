@@ -12,7 +12,7 @@ const useSelectCart = () => {
       const res = await fetch(
         `${import.meta.env.VITE_URL_KEY}/selected?email=${user?.email}`
       );
-      console.log("res from axios", res);
+      // console.log("res from axios", res);
       return res.json();
     },
   });
