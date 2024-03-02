@@ -21,7 +21,6 @@ const ClassTableRow = ({
   const {
     register,
     handleSubmit,
-    reset,
     // formState: { errors },
   } = useForm();
 
@@ -33,7 +32,7 @@ const ClassTableRow = ({
   return (
     <>
       <tr>
-        <th>{index+1}</th>
+        <th>{index + 1}</th>
         <td>
           <div className="flex items-center gap-3">
             <div className="avatar">
