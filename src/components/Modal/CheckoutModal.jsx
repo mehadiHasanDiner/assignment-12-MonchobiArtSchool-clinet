@@ -4,13 +4,13 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Fragment } from "react";
 import CheckoutForm from "../../Pages/Dashboard/Payment/CheckoutForm";
 
-const CheckoutModal = ({ closeModal, isOpen, selected }) => {
+const CheckoutModal = ({ closeModal, open, selected }) => {
   const stripePromise = loadStripe(
     `${import.meta.env.VITE_Payment_Gateway_PK}`
   );
 
   return (
-    <Transition appear show={isOpen} as={Fragment}>
+    <Transition appear show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
         <Transition.Child
           as={Fragment}
@@ -49,12 +49,12 @@ const CheckoutModal = ({ closeModal, isOpen, selected }) => {
                   </p>
                   <hr className="mt-3" />
                   <div className="text-sm mt-6">
-                    {/* <Elements stripe={stripePromise}>
+                    <Elements stripe={stripePromise}>
                       <CheckoutForm
                         closeModal={closeModal}
                         selected={selected}
                       ></CheckoutForm>
-                    </Elements> */}
+                    </Elements>
                   </div>
                 </div>
               </Dialog.Panel>

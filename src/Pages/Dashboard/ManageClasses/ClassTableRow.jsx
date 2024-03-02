@@ -5,6 +5,7 @@ const ClassTableRow = ({
   handleDenyClass,
   handleFeedbackClass,
   classData,
+  index,
 }) => {
   const {
     _id,
@@ -20,25 +21,19 @@ const ClassTableRow = ({
   const {
     register,
     handleSubmit,
-    // reset,
+    reset,
     // formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => {
-    // const adminFeedback = data.feedback;
-    // return adminFeedback;
+    const adminFeedback = data.feedback;
+    console.log(adminFeedback);
   };
-  const sum = () => {
-    const total = 1 + 3;
-    return total;
-  };
-
-  //   console.log(onSubmit());
 
   return (
     <>
       <tr>
-        <th>{_id.slice(21, 25)}</th>
+        <th>{index+1}</th>
         <td>
           <div className="flex items-center gap-3">
             <div className="avatar">
@@ -95,7 +90,7 @@ const ClassTableRow = ({
 
             {/* modal button */}
             <label
-              onClick={() => handleFeedbackClass(_id, sum)}
+              onClick={() => handleFeedbackClass(_id, onSubmit)}
               htmlFor="my_modal_6"
               className="btn btn-outline btn-primary btn-xs"
             >
@@ -107,7 +102,7 @@ const ClassTableRow = ({
                 <div className="modal-box">
                   <h3 className="font-bold text-lg ">Give Feedback</h3>
 
-                  <form onSubmit={handleSubmit(() => onSubmit())}>
+                  <form onSubmit={handleSubmit(onSubmit)}>
                     <textarea
                       type="text"
                       className="textarea textarea-secondary w-full my-3"

@@ -47,10 +47,8 @@ const ManageClasses = () => {
     });
   };
 
-  const handleFeedbackClass = (id, abc) => {
-    // sendFeedback(id).then((data) => {});
-
-    console.log(id, abc());
+  const handleFeedbackClass = (id) => {
+    console.log(id);
   };
 
   return (
@@ -65,7 +63,7 @@ const ManageClasses = () => {
             {/* head */}
             <thead>
               <tr className="bg-pink-600 text-white">
-                <th>Cl. code</th>
+                <th>SL</th>
                 <th>Cl. Image</th>
                 <th>Cl. Title </th>
                 <th>Instructor name</th>
@@ -79,8 +77,9 @@ const ManageClasses = () => {
             <tbody>
               {allClassesData.map((classData, index) => (
                 <ClassTableRow
+                  index={index}
                   classData={classData}
-                  key={index}
+                  key={classData?._id}
                   handleApproveClass={handleApproveClass}
                   handleDenyClass={handleDenyClass}
                   handleFeedbackClass={handleFeedbackClass}
