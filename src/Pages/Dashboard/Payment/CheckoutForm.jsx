@@ -2,7 +2,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import "./CheckoutForm.css";
 import { useState } from "react";
 
-const CheckoutForm = ({ closeModal, selected }) => {
+const CheckoutForm = ({ label, selected }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [cardError, setCardError] = useState("");
@@ -60,7 +60,11 @@ const CheckoutForm = ({ closeModal, selected }) => {
           }}
         />
 
-        <div className="mt-4">
+        <div>
+          {cardError && (
+            <p className="text-red-600 mb-6 text-center"> {cardError}</p>
+          )}
+
           <div className="flex mt-2 justify-around">
             <button
               disabled={!stripe}
@@ -70,17 +74,10 @@ const CheckoutForm = ({ closeModal, selected }) => {
             >
               Pay ${selected?.feeAmount}
             </button>
-            <button
-              type="button"
-              className="inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
-              onClick={closeModal}
-            >
-              Cancel
-            </button>
+            {label}
           </div>
         </div>
       </form>
-      {cardError && <p className="text-red-600"> {cardError}</p>}
     </>
   );
 };

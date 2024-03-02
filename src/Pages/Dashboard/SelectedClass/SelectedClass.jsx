@@ -1,17 +1,11 @@
 import useSelectCart from "../../../hooks/useSelectCart";
 import Swal from "sweetalert2";
-import { useState } from "react";
 import SelectedClassRow from "./SelectedClassRow";
 
 const SelectedClass = () => {
   const [selectedCart, refetch] = useSelectCart();
-  const [open, setOpen] = useState(false);
 
   // const total = selectedCart.reduce((sum, item) => sum + item.feeAmount, 0);
-
-  const closeModal = () => {
-    setOpen(false);
-  };
 
   const handleDeleteClass = (selected) => {
     Swal.fire({
@@ -82,8 +76,6 @@ const SelectedClass = () => {
                 key={selected?._id}
                 selected={selected}
                 open={open}
-                setOpen={setOpen}
-                closeModal={closeModal}
                 handleDeleteClass={handleDeleteClass}
               ></SelectedClassRow>
             ))}

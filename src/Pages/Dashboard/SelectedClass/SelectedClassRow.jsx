@@ -5,8 +5,6 @@ import { FaWallet } from "react-icons/fa6";
 const SelectedClassRow = ({
   index,
   handleDeleteClass,
-  open,
-  setOpen,
   closeModal,
   selected,
 }) => {
@@ -32,13 +30,14 @@ const SelectedClassRow = ({
       <td>{selected?.instructor}</td>
       <td>${selected?.feeAmount}</td>
       <th>
-        <button
-          onClick={() => setOpen(true)}
-          className="btn btn-outline mr-2 btn-success btn-xs"
+        <label
+          htmlFor="my_modal_6"
+          className="btn btn-outline btn-success btn-xs mr-2"
         >
           <FaWallet />
           Pay
-        </button>
+        </label>
+
         <button
           onClick={() => handleDeleteClass(selected)}
           className="btn btn-outline btn-error btn-xs"
