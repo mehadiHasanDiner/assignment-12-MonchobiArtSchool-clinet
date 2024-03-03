@@ -2,7 +2,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from "../../Pages/Dashboard/Payment/CheckoutForm";
 
-const CheckoutModal = ({ selected }) => {
+const CheckoutModal = ({ selectedForPayment }) => {
   const stripePromise = loadStripe(
     `${import.meta.env.VITE_Payment_Gateway_PK}`
   );
@@ -26,7 +26,10 @@ const CheckoutModal = ({ selected }) => {
           <span>Please make your payment online.</span>
           <div className="text-sm mt-6">
             <Elements stripe={stripePromise}>
-              <CheckoutForm selected={selected} label={label}></CheckoutForm>
+              <CheckoutForm
+                selectedForPayment={selectedForPayment}
+                label={label}
+              ></CheckoutForm>
             </Elements>
           </div>
         </div>

@@ -7,6 +7,8 @@ const SelectedClassRow = ({
   handleDeleteClass,
   closeModal,
   selected,
+  handleShowPaymentDetails,
+  selectedForPayment,
 }) => {
   return (
     <tr>
@@ -31,6 +33,7 @@ const SelectedClassRow = ({
       <td>${selected?.feeAmount}</td>
       <th>
         <label
+          onClick={() => handleShowPaymentDetails(selected)}
           htmlFor="my_modal_6"
           className="btn btn-outline btn-success btn-xs mr-2"
         >
@@ -48,7 +51,7 @@ const SelectedClassRow = ({
       </th>
       {/* checkout modal for payment*/}
       <CheckoutModal
-        selected={selected}
+        selectedForPayment={selectedForPayment}
         open={open}
         closeModal={closeModal}
       ></CheckoutModal>

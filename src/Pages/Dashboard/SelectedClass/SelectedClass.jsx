@@ -1,9 +1,11 @@
 import useSelectCart from "../../../hooks/useSelectCart";
 import Swal from "sweetalert2";
 import SelectedClassRow from "./SelectedClassRow";
+import { useState } from "react";
 
 const SelectedClass = () => {
   const [selectedCart, refetch] = useSelectCart();
+  const [selectedForPayment, setSelectedForPayment] = useState(null);
 
   // const total = selectedCart.reduce((sum, item) => sum + item.feeAmount, 0);
 
@@ -40,6 +42,10 @@ const SelectedClass = () => {
     });
   };
 
+  const handleShowPaymentDetails = (selected) => {
+    setSelectedForPayment(selected);
+  };
+  console.log(selectedForPayment);
   return (
     <div>
       {/* <div className="flex justify-evenly items-center my-4 py-2 bg-slate-200">
@@ -77,6 +83,8 @@ const SelectedClass = () => {
                 selected={selected}
                 open={open}
                 handleDeleteClass={handleDeleteClass}
+                handleShowPaymentDetails={handleShowPaymentDetails}
+                selectedForPayment={selectedForPayment}
               ></SelectedClassRow>
             ))}
             {/* row 1 */}
