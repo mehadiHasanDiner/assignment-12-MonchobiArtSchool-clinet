@@ -66,7 +66,9 @@ const ManageClasses = () => {
   //   setIsModalOpen(false);
   // };
 
-  const handleFormSubmit = () => {
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+
     sendFeedback(feedbackModal?._id, feedbackText).then((data) => {
       if (data.modifiedCount > 0) {
         Swal.fire({

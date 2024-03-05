@@ -14,7 +14,6 @@ const ClassTableRow = ({
   // if (!isModalOpen) return null;
 
   const handleChange = (event) => {
-    event.preventDefault();
     setFeedbackText(event.target.value);
   };
 
