@@ -17,7 +17,7 @@ const Classes = () => {
   return (
     <>
       <div>
-        <Cover heading={"heading"}></Cover>
+        <Cover heading={"Our Best Courses"}></Cover>
       </div>
       <div className="my-8 grid grid-cols-1 md:grid-cols-2 gap-8 w-full lg:grid-cols-3">
         {classesData.map((data) => (

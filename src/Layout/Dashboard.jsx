@@ -1,13 +1,17 @@
 import { IoMdMenu } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
+import { FiLogOut } from "react-icons/fi";
+
 import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import { AiFillDashboard } from "react-icons/ai";
 import useUserRole from "../hooks/useUserRole";
 import DashboardTest from "../Pages/Dashboard/Dashboard/DashboardTest";
 import { useState } from "react";
+import useAuth from "../hooks/useAuth";
 
 const Dashboard = () => {
   const [isSecuredRole] = useUserRole();
+  const { logOut } = useAuth();
   console.log(isSecuredRole);
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(true);
@@ -26,18 +30,36 @@ const Dashboard = () => {
     setMenuOpen(!menuOpen);
   };
 
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        // Sign-out successful.
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <>
-      <div className="relative bg-pink-700 max-w-full py-2 font-bold flex pl-12 lg:pl-2">
-        <AiFillDashboard size={24} color="white" />
-        <span className="pl-2 text-white">
-          {isSecuredRole === "admin" ? (
-            "Admin"
-          ) : (
-            <>{isSecuredRole === "instructor" ? "Instructor" : "Student"}</>
-          )}{" "}
-          Dashboard
-        </span>
+      <div className="relative bg-pink-700 max-w-full py-2 font-bold flex pl-12 lg:pl-2 justify-between">
+        <div className="flex">
+          <AiFillDashboard size={24} color="white" />
+          <span className="pl-2 text-white">
+            {isSecuredRole === "admin" ? (
+              "Admin"
+            ) : (
+              <>{isSecuredRole === "instructor" ? "Instructor" : "Student"}</>
+            )}{" "}
+            Dashboard
+          </span>
+        </div>
+        <button
+          onClick={handleLogOut}
+          className="px-2 mr-2 btn btn-xs  hover:bg-pink-600  hover:rounded-md"
+        >
+          <FiLogOut /> Logout
+        </button>
       </div>
 
       <div className="drawer lg:drawer-open ">
@@ -66,13 +88,13 @@ const Dashboard = () => {
           </label>
         </div>
 
-        <div className="drawer-side mt-10 lg:mt-0">
+        <div className="drawer-side mt-10 lg:mt-0 ">
           <label
             htmlFor="my-drawer-2"
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu p-4 w-48 min-h-full bg-pink-200 text-base-content">
+          <ul className="menu p-4 w-48 min-h-full bg-pink-200 text-base-content ">
             {/* Sidebar content here */}
 
             <li className="mb-2">
@@ -151,6 +173,9 @@ const Dashboard = () => {
             </li>
             <li>
               <NavLink to="/classes">Classes</NavLink>
+            </li>
+            <li>
+              <NavLink to="/instructors">Instructors</NavLink>
             </li>
           </ul>
         </div>

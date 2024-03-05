@@ -84,7 +84,9 @@ const ClassCard = ({
     <div
       className={
         "card w-full  shadow-xl " +
-        (availableSeat > 0 ? "bg-orange-100" : "bg-red-600")
+        (availableSeat > 0
+          ? "bg-gradient-to-br from-pink-200 to-orange-200"
+          : "bg-red-600")
       }
     >
       <figure>
@@ -106,7 +108,7 @@ const ClassCard = ({
                   availableSeat > 0
                     ? isClassNameContain
                       ? "btn btn-disabled"
-                      : "btn btn-primary"
+                      : " text-white btn bg-gradient-to-bl from-pink-700 to-orange-400"
                     : " btn btn-disabled"
                 }
               >

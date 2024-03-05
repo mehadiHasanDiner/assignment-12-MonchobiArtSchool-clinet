@@ -1,0 +1,50 @@
+[
+    {
+        "_id": "65e75f58dd9f11aa240d6916",
+        "email": "mehadi.cosmo@gmail.com",
+        "name": "Mehadi Hasan",
+        "photoURL": "https://lh3.googleusercontent.com/a/ACg8ocLYKoI00SixBMfnHS7p4av9wGui-ivovv2KHW0F9FnNsLQ=s96-c",
+        "bioData" : "? Nostrum, minus! Quidem rerum ducimus animi molestiae itaque quae unde,Instructor Card Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta odio quasi quibusdam commodi, facere, rerum adipisci rem voluptatem earum doloremque consectetur omnis id at minima alias!",
+        "role": "admin"
+    },
+    {
+        "_id": "65e75ffedd9f11aa240d6918",
+        "email": "sharukh@email.com",
+        "name": "Sharukh Khan",
+        "photoURL": "https://tech-hindi.in/wp-content/uploads/2023/09/shah-rukh-khan-pathaan-2-1-660x495-1.jpg",
+        "bioData": " Nostrum, minus! Quidem rerum ducimus animi molestiae itaque quae unde, voluptatibus delectus vero quibusdam magnam sint consectetur tempore dolore ea dignissimos ipsum, architecto repellat, adipisicing elit. Dicta odio quasi quibusdam commodi, facere, rerum adipisci!",
+        "role": "instructor"
+    },
+    {
+        "_id": "65e7600edd9f11aa240d6919",
+        "email": "salman@email.com",
+        "name": "Salman Khan",
+        "photoURL": "https://i.pinimg.com/originals/ed/d2/70/edd270458de58669478362356a026053.jpg",
+        "bioData": "Instructor Card Lorem ipsum dolor sit amet consectetur, voluptatibus delectus vero quibusdam magnam sint consectetur tempore dolore ea dignissimos ipsum, architecto repellat!",
+        "role": "instructor"
+    },
+    {
+        "_id": "65d38ea86fbf0ed4abcdeb26",
+        "email": "mehadi135@gmail.com",
+        "name": "Mehadi Hasan (Diner)",
+        "photoURL": "https://lh3.googleusercontent.com/a/ACg8ocInsz0wjAtisifRdle5NCpED9W_k4chAN6Q_xk_XCuPZRk=s96-c",
+        "bioData": "Rerum adipisci rem voluptatem earum doloremque consectetur omnis id at minima alias? Nostrum, minus! Quidem rerum ducimus animi molestiae itaque quae unde, voluptatibus delectus vero quibusdam magnam sint consectetur tempore dolore ea dignissimos ipsum, architecto repellat!",
+        "role": "user"
+    },
+    {
+        "_id": "65d38ee06fbf0ed4abce55e3",
+        "email": "cosmoschooloffice@gmail.com",
+        "name": "Cosmo School",
+        "photoURL": "https://lh3.googleusercontent.com/a/ACg8ocK8aDbGa633Ows892J48XHU51SddtBOaeKvUDw09RikAA=s96-c",
+        "bioData": "Instructor Card Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta odio quasi quibusdam commodi, facere, rerum adipisci rem voluptatem earum doloremque consectetur omnis id at minima alias? ",
+        "role": "instructor"
+    },
+    {
+        "_id": "65e7604fdd9f11aa240d691a",
+        "email": "shakib@khan.com",
+        "name": "Shakib Khan",
+        "photoURL": "https://i.pinimg.com/originals/f9/1a/ee/f91aee73958846d8322fb4e200e33a67.jpg",
+        "bioData": " Nostrum, minus! Quidem rerum ducimus animi molestiae itaque quae unde, voluptatibus delectus vero quibusdam magnam sint consectetur tempore dolore ea dignissimos ipsum, architecto repellat!",
+        "role": "user"
+    }
+]
