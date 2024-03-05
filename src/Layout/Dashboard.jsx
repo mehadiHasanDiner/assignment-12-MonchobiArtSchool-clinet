@@ -1,16 +1,20 @@
-import { TfiMenuAlt } from "react-icons/tfi";
+import { IoMdMenu } from "react-icons/io";
+import { RxCross2 } from "react-icons/rx";
 import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import { AiFillDashboard } from "react-icons/ai";
 import useUserRole from "../hooks/useUserRole";
 import DashboardTest from "../Pages/Dashboard/Dashboard/DashboardTest";
+import { useState } from "react";
 
 const Dashboard = () => {
   const [isSecuredRole] = useUserRole();
   console.log(isSecuredRole);
   const location = useLocation();
+  const [menuOpen, setMenuOpen] = useState(true);
 
   const active = {
     color: "",
+    background: "#be185d",
     fontWeight: "bold",
   };
 
@@ -18,9 +22,13 @@ const Dashboard = () => {
     color: "black",
   };
 
+  const handleMenuOpen = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
     <>
-      <div className="relative bg-pink-700 max-w-full py-2 font-bold flex pl-3">
+      <div className="relative bg-pink-700 max-w-full py-2 font-bold flex pl-12 lg:pl-2">
         <AiFillDashboard size={24} color="white" />
         <span className="pl-2 text-white">
           {isSecuredRole === "admin" ? (
@@ -46,10 +54,15 @@ const Dashboard = () => {
           </div>
 
           <label
+            onClick={handleMenuOpen}
             htmlFor="my-drawer-2"
-            className=" absolute -top-9 right-3 cursor-pointer hover:bg-pink-600  px-2 py-1 drawer-button lg:hidden rounded"
+            className=" absolute -top-9 left-1 cursor-pointer hover:bg-pink-600  px-2 py-1 drawer-button lg:hidden rounded"
           >
-            <TfiMenuAlt color="white" size={24} />
+            {menuOpen ? (
+              <IoMdMenu color="white" size={24} />
+            ) : (
+              <RxCross2 color="white" size={24} />
+            )}
           </label>
         </div>
 

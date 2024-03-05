@@ -89,7 +89,7 @@ const CheckoutForm = ({ label, selectedForPayment }) => {
         transactionId: paymentIntent.id,
         feeAmount,
         date: new Date(),
-        status: "service pending",
+        status: "Enrolled",
         nameOfClass: selectedForPayment?.nameOfClass,
         selectId: selectedForPayment?._id,
         classId: selectedForPayment?.classId,

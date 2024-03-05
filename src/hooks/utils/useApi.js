@@ -4,7 +4,6 @@ export const saveUsers = (user) => {
     name: user.displayName,
     email: user.email,
     photoURL: user.photoURL,
-    role: "user",
   };
   fetch(`${import.meta.env.VITE_URL_KEY}/users/${user?.email}`, {
     method: "PUT",

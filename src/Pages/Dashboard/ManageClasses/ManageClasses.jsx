@@ -9,7 +9,9 @@ import { useState } from "react";
 
 const ManageClasses = () => {
   const [allClassesData, refetch] = usePostedClass();
+  const [feedbackModal, setFeedbackModal] = useState(null);
   const [feedbackText, setFeedbackText] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleApproveClass = (id) => {
     setApprovedDenied(id, "Approved").then((data) => {
@@ -47,8 +49,41 @@ const ManageClasses = () => {
     });
   };
 
-  const handleFeedbackClass = (id) => {
-    console.log(id);
+  const handleOpenModal = (classData) => {
+    setFeedbackModal(classData);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  // const handleFormSubmit = () => {
+  //   // setFeedbackText(data);
+  //   console.log(feedbackText);
+  //   console.log(feedbackModal);
+  //   setFeedbackText("");
+  //   setIsModalOpen(false);
+  // };
+
+  const handleFormSubmit = () => {
+    sendFeedback(feedbackModal?._id, feedbackText).then((data) => {
+      if (data.modifiedCount > 0) {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          iconColor: "#fabee4",
+          title: "Feedback has been sent to the instructor.",
+          showConfirmButton: false,
+          timer: 2000,
+          background: "crimson",
+          color: "white",
+        });
+      }
+      setFeedbackText("");
+      setIsModalOpen(false);
+      refetch();
+    });
   };
 
   return (
@@ -82,7 +117,12 @@ const ManageClasses = () => {
                   key={classData?._id}
                   handleApproveClass={handleApproveClass}
                   handleDenyClass={handleDenyClass}
-                  handleFeedbackClass={handleFeedbackClass}
+                  //all props for controlling modal state
+                  isModalOpen={isModalOpen}
+                  handleOpenModal={handleOpenModal}
+                  handleCloseModal={handleCloseModal}
+                  onSubmit={handleFormSubmit}
+                  feedbackText={feedbackText}
                   setFeedbackText={setFeedbackText}
                 ></ClassTableRow>
               ))}

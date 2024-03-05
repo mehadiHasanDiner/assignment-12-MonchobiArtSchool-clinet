@@ -1,12 +1,23 @@
-import { useForm } from "react-hook-form";
-
 const ClassTableRow = ({
   handleApproveClass,
   handleDenyClass,
-  handleFeedbackClass,
   classData,
   index,
+
+  onSubmit,
+  handleCloseModal,
+  handleOpenModal,
+  feedbackText,
+  setFeedbackText,
+  isModalOpen,
 }) => {
+  // if (!isModalOpen) return null;
+
+  const handleChange = (event) => {
+    event.preventDefault();
+    setFeedbackText(event.target.value);
+  };
+
   const {
     _id,
     img,
@@ -17,17 +28,6 @@ const ClassTableRow = ({
     nameOfClass,
     status,
   } = classData || {};
-
-  const {
-    register,
-    handleSubmit,
-    // formState: { errors },
-  } = useForm();
-
-  const onSubmit = (data) => {
-    const adminFeedback = data.feedback;
-    console.log(adminFeedback);
-  };
 
   return (
     <>
@@ -89,36 +89,50 @@ const ClassTableRow = ({
 
             {/* modal button */}
             <label
-              onClick={() => handleFeedbackClass(_id, onSubmit)}
+              onClick={() => handleOpenModal(classData)}
               htmlFor="my_modal_6"
               className="btn btn-outline btn-primary btn-xs"
             >
               Feedback
             </label>
-            <input type="checkbox" id="my_modal_6" className="modal-toggle" />
-            <>
-              <div className="modal" role="dialog">
-                <div className="modal-box">
-                  <h3 className="font-bold text-lg ">Give Feedback</h3>
+            {isModalOpen && (
+              <>
+                <input
+                  type="checkbox"
+                  id="my_modal_6"
+                  className="modal-toggle"
+                />
 
-                  <form onSubmit={handleSubmit(onSubmit)}>
-                    <textarea
-                      type="text"
-                      className="textarea textarea-secondary w-full my-3"
-                      {...register("feedback")}
-                    />
+                <div className="modal" role="dialog">
+                  <div className="modal-box">
+                    <h3 className="font-bold text-lg ">Give Feedback</h3>
 
-                    <input className="btn btn-primary" type="submit" />
-                  </form>
+                    <form onSubmit={onSubmit}>
+                      <textarea
+                        className="textarea textarea-secondary w-full my-3"
+                        value={feedbackText}
+                        onChange={handleChange}
+                        placeholder="Enter your text here"
+                      />
 
-                  <div className="modal-action">
-                    <label htmlFor="my_modal_6" className="btn">
-                      Close!
-                    </label>
+                      <div className="modal-action">
+                        <button type="submit" className="btn btn-primary">
+                          Submit
+                        </button>
+
+                        <label
+                          onClick={handleCloseModal}
+                          className="btn btn-accent"
+                        >
+                          {" "}
+                          Close{" "}
+                        </label>
+                      </div>
+                    </form>
                   </div>
                 </div>
-              </div>
-            </>
+              </>
+            )}
           </div>
         </th>
       </tr>
