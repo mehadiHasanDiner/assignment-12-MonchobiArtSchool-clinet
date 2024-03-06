@@ -1,9 +1,17 @@
 import { useEffect, useState } from "react";
 import Cover from "../../Shared/Cover/Cover";
 import InstructorCard from "../../components/InstructorCard/InstructorCard";
+import { Helmet } from "react-helmet-async";
 
 const Instructors = () => {
   const [instructors, setInstructors] = useState([]);
+  const [instructorDetails, setInstructorDetails] = useState([]);
+
+  const handleOpenModal = (data) => {
+    setInstructorDetails(data);
+    console.log(data);
+  };
+
   useEffect(() => {
     fetch("instructorData.json")
       .then((res) => res.json())
@@ -12,9 +20,11 @@ const Instructors = () => {
         console.log(data);
       });
   }, []);
-  console.log(instructors.length);
   return (
     <div>
+      <Helmet>
+        <title>Instructors | Monchobi Art School </title>
+      </Helmet>
       <Cover heading={"Our Renowned Instructor"}></Cover>
 
       <div>
@@ -26,6 +36,9 @@ const Instructors = () => {
             <InstructorCard
               key={instructor?._id}
               instructor={instructor}
+              instructorDetails={instructorDetails}
+              setInstructorDetails={setInstructorDetails}
+              handleOpenModal={handleOpenModal}
             ></InstructorCard>
           ))}
         </div>

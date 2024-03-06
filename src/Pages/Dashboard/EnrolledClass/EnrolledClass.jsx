@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 
 const EnrolledClass = () => {
   const [enrollmentData, setEnrollmentData] = useState([]);
@@ -16,6 +17,9 @@ const EnrolledClass = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Enrollment | Monchobi Art School </title>
+      </Helmet>
       <p className="text-xl font-bold">Order History</p>
       <div className="overflow-x-auto">
         <table className="table table-zebra">

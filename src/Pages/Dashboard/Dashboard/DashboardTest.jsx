@@ -12,9 +12,9 @@ const DashboardTest = () => {
             Role: Admin
           </p>
           <p className="text-xl font-bold text-center">
-            Email: shakib@khan.com
+            Email: test123@test.com
           </p>
-          <p className="text-xl font-bold text-center">Password: 123Aa#</p>
+          <p className="text-xl font-bold text-center">Password: Test123#</p>
 
           <p className="italic text-center">
             N.B. Add more new classes as an instructor. For changing the user

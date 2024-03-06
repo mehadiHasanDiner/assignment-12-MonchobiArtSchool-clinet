@@ -8,6 +8,7 @@ import useUserRole from "../hooks/useUserRole";
 import DashboardTest from "../Pages/Dashboard/Dashboard/DashboardTest";
 import { useState } from "react";
 import useAuth from "../hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 
 const Dashboard = () => {
   const [isSecuredRole] = useUserRole();
@@ -43,6 +44,9 @@ const Dashboard = () => {
   return (
     <>
       <div className="relative bg-pink-700 max-w-full py-2 font-bold flex pl-12 lg:pl-2 justify-between">
+        <Helmet>
+          <title>Dashboard | Monchobi Art School </title>
+        </Helmet>
         <div className="flex">
           <AiFillDashboard size={24} color="white" />
           <span className="pl-2 text-white">

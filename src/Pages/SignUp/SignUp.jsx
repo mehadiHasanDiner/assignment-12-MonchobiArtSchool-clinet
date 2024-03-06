@@ -6,6 +6,7 @@ import { FaRegEye } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 import { saveUsers } from "../../hooks/utils/useApi";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -77,6 +78,9 @@ const SignUp = () => {
 
   return (
     <div className="mt-8 bg">
+      <Helmet>
+        <title>Sign Up | Monchobi Art School </title>
+      </Helmet>
       <h1 className="text-4xl font-bold text-center">Please Sign Up</h1>
       <div className="m-auto hero-content flex-col lg:flex-row-reverse ">
         <div className="text-center lg:text-left "></div>

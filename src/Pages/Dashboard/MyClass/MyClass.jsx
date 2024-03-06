@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const MyClass = () => {
   const [myClasses, setMyClasses] = useState([]);
@@ -22,6 +23,9 @@ const MyClass = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>My Class | Monchobi Art School </title>
+      </Helmet>
       <p className=" font-bold text-2xl text-pink-600">
         Total Added Class: {myClasses.length}
       </p>

@@ -9,6 +9,7 @@ import { ImSpinner9 } from "react-icons/im";
 import toast from "react-hot-toast";
 
 import { saveUsers } from "../../hooks/utils/useApi";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const { loading, setLoading } = useAuth();
@@ -67,6 +68,9 @@ const Login = () => {
 
   return (
     <div className="mt-8 bg">
+      <Helmet>
+        <title>Login | Monchobi Art School </title>
+      </Helmet>
       <h1 className="text-4xl font-bold text-center">Please Login</h1>
       <div className=" m-auto hero-content flex-col lg:flex-row-reverse ">
         <div className="text-center lg:text-left "></div>

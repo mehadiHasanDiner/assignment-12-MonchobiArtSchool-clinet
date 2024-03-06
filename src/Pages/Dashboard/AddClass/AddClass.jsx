@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { imageUpload } from "../../../hooks/utils/imageUpload";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const AddClass = () => {
   const { user } = useAuth();
@@ -53,6 +54,9 @@ const AddClass = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Add Class | Monchobi Art School </title>
+      </Helmet>
       <p className="text-3xl font-bold text-pink-700 mt-4 -mb-4">
         Add a New Class
       </p>

@@ -57,7 +57,7 @@ const ManageUsers = () => {
   return (
     <div>
       <Helmet>
-        <title>All Users | Monchobi Art School </title>
+        <title>Manage Users | Monchobi Art School </title>
       </Helmet>
       <h3 className="text-2xl font-bold">Total Users: {users?.length} </h3>
       <div className="overflow-x-auto">

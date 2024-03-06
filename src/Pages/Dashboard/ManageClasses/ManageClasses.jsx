@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import ClassTableRow from "./ClassTableRow";
 import usePostedClass from "../../../hooks/usePostedClass";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const ManageClasses = () => {
   const [allClassesData, refetch] = usePostedClass();
@@ -91,6 +92,9 @@ const ManageClasses = () => {
   return (
     <>
       <div>
+        <Helmet>
+          <title>Manage Class | Monchobi Art School </title>
+        </Helmet>
         <p className="text-center text-2xl font-bold capitalize text-pink-700 my-6">
           All class list added by Instructors
         </p>

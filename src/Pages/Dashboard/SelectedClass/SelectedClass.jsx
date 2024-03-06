@@ -2,12 +2,11 @@ import useSelectCart from "../../../hooks/useSelectCart";
 import Swal from "sweetalert2";
 import SelectedClassRow from "./SelectedClassRow";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const SelectedClass = () => {
   const [selectedCart, refetch] = useSelectCart();
   const [selectedForPayment, setSelectedForPayment] = useState(null);
-
-  // const total = selectedCart.reduce((sum, item) => sum + item.feeAmount, 0);
 
   const handleDeleteClass = (selected) => {
     Swal.fire({
@@ -48,20 +47,9 @@ const SelectedClass = () => {
   console.log(selectedForPayment);
   return (
     <div>
-      {/* <div className="flex justify-evenly items-center my-4 py-2 bg-slate-200">
-        <h3 className="text-center font-bold">
-          Total Class Selected: {selectedCart?.length}
-        </h3>
-        <h3 className="text-center font-bold">Total Fees: ${total}</h3>
-        <button
-          onClick={() => setOpen(true)}
-          className="btn btn-outline btn-neutral btn-sm "
-        >
-          <FaWallet />
-          Pay
-        </button>
-      </div> */}
-
+      <Helmet>
+        <title>Selected Class | Monchobi Art School </title>
+      </Helmet>
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}

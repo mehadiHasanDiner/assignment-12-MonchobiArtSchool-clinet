@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import Cover from "../../Shared/Cover/Cover";
 import ClassCard from "../../components/ClassCard/ClassCard";
 import { useEffect, useState } from "react";
@@ -17,6 +18,9 @@ const Classes = () => {
   return (
     <>
       <div>
+        <Helmet>
+          <title>All Classes | Monchobi Art School </title>
+        </Helmet>
         <Cover heading={"Our Best Courses"}></Cover>
       </div>
       <div className="my-8 grid grid-cols-1 md:grid-cols-2 gap-8 w-full lg:grid-cols-3">
