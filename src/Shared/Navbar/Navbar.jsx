@@ -78,7 +78,7 @@ const Navbar = () => {
       className={
         theme
           ? " navbar shadow-xl sticky top-0 right-0 z-40"
-          : "bg-pink-800"
+          : "bg-black" 
       }
     >
       <div className="navbar-start">
