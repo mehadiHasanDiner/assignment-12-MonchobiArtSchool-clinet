@@ -1,0 +1,8 @@
+.App.dark {
+  background-color: #9d174d;
+  color: black;
+}
+.App.light {
+  background-color: black;
+  color: #9d174d;
+}

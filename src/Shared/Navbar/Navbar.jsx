@@ -5,12 +5,15 @@ import { MdLogout, MdOutlineLogin } from "react-icons/md";
 import logo from "../../assets/monchobi.png";
 
 import useAuth from "../../hooks/useAuth";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ThemeContext } from "../../provider/ThemeContext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { theme } = useContext(ThemeContext);
 
   const { user, logOut } = useAuth();
+  const { toggleTheme } = useContext(ThemeContext);
 
   const handleMenuOpen = () => {
     setIsOpen(!isOpen);
@@ -71,7 +74,13 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar bg-pink-800 shadow-xl sticky top-0 right-0 z-40 ">
+    <div
+      className={
+        theme
+          ? " navbar shadow-xl sticky top-0 right-0 z-40"
+          : "bg-pink-800"
+      }
+    >
       <div className="navbar-start">
         <div onClick={() => handleMenuOpen()} className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden ">
@@ -107,6 +116,11 @@ const Navbar = () => {
             >
               <div className="card-body items-center text-center">
                 <img className="w-11 rounded-full " src={user.photoURL} />
+                <input
+                  onClick={toggleTheme}
+                  type="checkbox"
+                  className="toggle toggle-error"
+                />
                 <h3 className="card-title">{user?.displayName}</h3>
                 <p className="badge badge-neutral">{user?.email}</p>
                 <button
