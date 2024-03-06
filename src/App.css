@@ -1,8 +1,8 @@
-.App.dark {
+.App.light {
   background-color: #9d174d;
   color: black;
 }
-.App.light {
+.App.dark {
   background-color: black;
   color: #9d174d;
 }

@@ -13,6 +13,7 @@ const Navbar = () => {
   const { theme } = useContext(ThemeContext);
 
   const { user, logOut } = useAuth();
+  console.log(user);
   const { toggleTheme } = useContext(ThemeContext);
 
   const handleMenuOpen = () => {
@@ -70,15 +71,18 @@ const Navbar = () => {
       >
         Dashboard
       </NavLink>
+      <input
+        onClick={toggleTheme}
+        type="checkbox"
+        className="toggle toggle-error"
+      />
     </>
   );
 
   return (
     <div
       className={
-        theme
-          ? " navbar shadow-xl sticky top-0 right-0 z-40"
-          : "bg-black" 
+        theme ? " navbar shadow-xl sticky top-0 right-0 z-40" : "bg-black"
       }
     >
       <div className="navbar-start">
@@ -116,11 +120,7 @@ const Navbar = () => {
             >
               <div className="card-body items-center text-center">
                 <img className="w-11 rounded-full " src={user.photoURL} />
-                <input
-                  onClick={toggleTheme}
-                  type="checkbox"
-                  className="toggle toggle-error"
-                />
+
                 <h3 className="card-title">{user?.displayName}</h3>
                 <p className="badge badge-neutral">{user?.email}</p>
                 <button
