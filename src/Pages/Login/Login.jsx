@@ -141,11 +141,13 @@ const Login = () => {
 
             <label className="label">
               <span>
-                New to Toy Land BD?
+                New User?
                 <Link
                   to="/signup"
                   className="text-center label-text-alt link link-hover hover:font-bold text-lg text-pink-600"
                 >
+                  {" "}
+                  {""}
                   Sign Up!
                 </Link>
               </span>
