@@ -31,7 +31,7 @@ Admin Activity:
 
 ## Live Link
 
-Client Side: Hosted in firebase -> [Monchobi Art School](https://assignment12-monchobiartschool.web.app)
+Client Side: Hosted in firebase -> [Monchobi Art School](https://65eb36344568f5b36dc632ec--astounding-chimera-b215cd.netlify.app/)
 Server Side Github Link -> [Sever Github](https://github.com/mehadiHasanDiner/assignment-12-MonchobiArtSchool-server)
 
 ## Resources & Tecnology I Used
