@@ -33,6 +33,7 @@ Admin Activity:
 
 Client Side: Hosted in firebase -> [Monchobi Art School](https://65eb36344568f5b36dc632ec--astounding-chimera-b215cd.netlify.app/)
 Server Side Github Link -> [Sever Github](https://github.com/mehadiHasanDiner/assignment-12-MonchobiArtSchool-server)
+Client Side Github Link -> [Client Side Github](https://github.com/mehadiHasanDiner/assignment-12-MonchobiArtSchool-clinet)
 
 ## Resources & Tecnology I Used
 
