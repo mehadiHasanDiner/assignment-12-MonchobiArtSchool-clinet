@@ -27,7 +27,7 @@ const Contact = () => {
     reset();
   };
   return (
-    <div className=" mt-12 py-4 flex flex-col-reverse md:flex-row md:justify-between bg-gradient-to-t from-fuchsia-400 to-yellow-100">
+    <div className=" mt-16 py-4 flex flex-col-reverse md:flex-row md:justify-between bg-gradient-to-t from-fuchsia-400 to-yellow-100">
       <div className="w-full flex flex-col  rounded-md ">
         <p className="font-bold text-3xl md:mt-8 text-center"> Contact Us</p>
         <form onSubmit={handleSubmit(onSubmit)} className="card-body -mb-6">
