@@ -8,7 +8,7 @@ const Classes = () => {
   const [load, setLoad] = useState(false);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_URL_KEY}/classes`)
+    fetch(`${import.meta.env.VITE_URL_KEY}/approvedClass`)
       .then((res) => res.json())
       .then((data) => {
         setClassesData(data);

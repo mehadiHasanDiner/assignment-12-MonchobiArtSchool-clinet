@@ -24,6 +24,18 @@ const AddClass = () => {
         const totalSeat = parseFloat(data.availableSeat);
         const totalFee = parseFloat(data.feeAmount);
         const { nameOfClass, instructor, email } = data;
+
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          iconColor: "crimson",
+          title: `${nameOfClass} class added successfully!`,
+          showConfirmButton: false,
+          timer: 1500,
+          background: "purple",
+          color: "white",
+        });
+
         const newClass = {
           nameOfClass,
           instructor,
@@ -33,22 +45,12 @@ const AddClass = () => {
           img: imgUrl,
           status: "pending",
         };
-        axiosSecure.post("/newClass", newClass).then((res) => res.data);
-        console.log("after posting new item", data);
-        if (data.insertedId) {
-          reset();
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            iconColor: "crimson",
-            title: `${nameOfClass} class added successfully!`,
-            showConfirmButton: false,
-            timer: 1500,
-            background: "purple",
-            color: "white",
-          });
-        }
+        axiosSecure.post("/newClass", newClass).then((res) => {
+          console.log(res, "after posting new item");
+          res.data;
+        });
       }
+      reset();
     });
   };
 

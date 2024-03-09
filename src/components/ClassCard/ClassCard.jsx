@@ -95,7 +95,7 @@ const ClassCard = ({
       <div className="card-body">
         <h2 className="card-title">{nameOfClass}</h2>
         <p>Instructor Name: {instructor}</p>
-        <p>Total Seat: {availableSeat}</p>
+       {location.pathname==="/" ? "" : <p>Available Seats: {availableSeat}</p>}
         <p> Registration Fee: ${feeAmount}</p>
         <div className="card-actions justify-end">
           {location.pathname === "/" ? (
