@@ -8,7 +8,7 @@ This is website app there 4 routes: homepage, instructors, classes, and dashboar
 
 (1) Any user or students can visit this site without entering the dashboard section. For accessing the dashboard user have to login first.
 
-Normal User Activity:
+### Normal User Activity:
 (2) If any student wanted to enroll any classes he/she can click the enroll button and after clicking the button a popup message will open and it will be displayed please login.
 
 (3) After login the selected class enroll button will be disabled and in the button the text will be change as selected.
@@ -17,21 +17,23 @@ Normal User Activity:
 
 (5) When the student pay the fees the selected class will be go to enrolled class and the status of class will be shown as enrolled also button of the classes page will be active.
 
-Instructor Activity:
+### Instructor Activity:
 (6) By default user when logging he will be user or student. But every user can play Instructor role when the admin give him the Instructor role. So for playing Instructor role user needs permission from the admin.
 
 (7) In instructor dashboard there will to route link add class and added my class. In add class instructor can create a new class. By default the opened class will be pending.
 
 (8) In added my class route instructor can see all of his class he is opened. when admin alow the class he will see the status approved and when admin deny the class he will see denied. Also their will be feedback, is any feedback is send by the admin he can see below of the status.
 
-Admin Activity:
+### Admin Activity:
 (9) In admin dashboard there will be two link routes All users and Manage class. In all users he can give any normal user access to play instructor role or admin role.
 
-(10) In manage class route he can see all the classes which has added the instructor. All the class status will be shown as pending. when admin Approve the class it will show Approved and when admin deny the class it will denied. Also he can send feedback to the instructor by writing the reason of Approved or denied.
+(10) In manage-class route he can see all the classes which has added the instructor. All the class status will be shown as pending. when admin Approve the class it will show Approved and when admin deny the class it will denied. Also he can send feedback to the instructor by writing the reason of Approved or denied.
+
+(11) If admin Approve the class the class it will also show in UI of classes route in card format. Latest approved classes will be shown at the beginning.
 
 ## Live Link
 
-Client Side: Hosted in firebase -> [Monchobi Art School](https://65eb36344568f5b36dc632ec--astounding-chimera-b215cd.netlify.app)
+Client Side: Hosted in firebase -> [Monchobi Art School](https://astounding-chimera-b215cd.netlify.app)
 Server Side Github Link -> [Sever Github](https://github.com/mehadiHasanDiner/assignment-12-MonchobiArtSchool-server)
 Client Side Github Link -> [Client Side Github](https://github.com/mehadiHasanDiner/assignment-12-MonchobiArtSchool-clinet)
 
